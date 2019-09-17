@@ -10,7 +10,12 @@ Le jeu doit se rapprocher le plus possible de la version classique pour Windows 
  * documenter votre code avec les commentaires javadoc.
  * gérer votre code grâce au gestionnaire de versions git
  
+## Remise : 
+
 C'est le code disponible sur votre divergence sur le gitlab du département au moment de la remise qui sera évaluée.
+
+Date de remise : 1er octobre 23h59
+
 
 ## Gestion du projet :
 
