@@ -1,4 +1,4 @@
-package quebec.crosemont.g04;
+package quebec.crosemont.g04.demineur;
 
 import java.util.Random;
 

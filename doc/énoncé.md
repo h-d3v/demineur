@@ -5,7 +5,7 @@ Le jeu doit se rapprocher le plus possible de la version classique pour Windows 
 ## Vous devez :
 
  * créer une divergence à partir du projet Démineur sur gitlab [https://git.dti.crosemont.quebec/plafrance/demineur.git](https://git.dti.crosemont.quebec/plafrance/demineur.git)
- * créer les classes demandées selon le schéma UML et le document d'analyse (à venir)
+ * créer les classes du package quebec.crosemont.g04.demineur demandées selon le schéma UML et le document d'analyse (à venir)
  * tester ces classes grâce à des tests unitaires JUnit
  * documenter votre code avec les commentaires javadoc.
  * gérer votre code grâce au gestionnaire de versions git
