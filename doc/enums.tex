@@ -1,0 +1,60 @@
+\section {Enum Type}
+
+Enum représentant les différents types possibles de Case :
+\begin{enumerate}
+  \setcounter{enumi}{-1}
+\item VIDE
+\item BOMBE
+\end{enumerate}
+
+\begin{itemize}
+\item Méthodes : 
+
+  \begin{enumerate}
+    
+    
+  \item {\bf toString() }: Retourne la représentation d'un Type de Case, c'est-à-dire le caractère à afficher pour ce type. Devrait être un de : 
+    \begin{description}
+    \item VIDE : Unicode 0x2B1C, «WHITE LARGE SQUARE»
+    \item BOMBE : Unicode 0x1F4A3, «BOMB»
+    \end{description}
+    
+    \begin{itemize}
+    \item Retour : La représentation du Type de Case.
+      \begin{itemize}
+      \item Type de retour: String
+      \end{itemize}
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
+
+\section {Enum Marque}
+
+Enum représentant les différentes marques possibles sur une Case :
+\begin{enumerate}
+  \setcounter{enumi}{-1}
+\item VIDE
+\item BOMBE
+\item INCONNUE
+\end{enumerate}
+
+\begin{itemize}
+\item Méthodes : 
+
+  \begin{enumerate}
+    
+  \item {\bf toString() }: Retourne la représentation d'une marque de Case, c'est-à-dire le caractère à afficher pour cette marque. Devrait être un de  : 
+    \begin{description}
+    \item VIDE : Unicode 0x2B1C, «WHITE LARGE SQUARE»
+    \item BOMBE : Unicode 0x1F6A9, «TRIANGULAR FLAG ON POST»
+    \item INCONNUE : «? »
+    \end{description}
+    
+    \begin{itemize}
+    \item Retour : La représentation du Type de Case.
+      \begin{itemize}
+      \item Type de retour: String
+      \end{itemize}
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
