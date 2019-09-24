@@ -1,0 +1,69 @@
+  \section {Classe Case}
+
+  Une case du jeu Démineur.
+
+  La case est initialement cachée et non marquée. Lorsque la case est marquée, la marque passe successivement de «vide» à «bombe» puis à «inconnue».
+
+  \begin{itemize}
+  \item Propriétés : 
+    \begin{enumerate}
+    \item {\bf type }: Le type de case soit «vide» ou «bombe».
+          \begin{itemize}
+          \item Type : Type
+          \item Accès : lecture seule
+          \end{itemize}
+    \item {\bf marque }: La marque sur la case soit «vide», «bombe» ou «inconnue».
+          \begin{itemize}
+          \item Type : Marque
+          \item Accès : lecture et écriture
+          \end{itemize}
+    \item {\bf découverte }: Vrai si et seulement si la case est découverte.
+          \begin{itemize}
+          \item Type : boolean
+          \item Accès : lecture et écriture
+          \end{itemize}
+
+    \end{enumerate}
+
+  \item Constructeurs : 
+
+  \begin{enumerate}
+  \item {\bf Case(Type) }: Constructeur paramétré.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unType (Type) : Le type de Case
+      \end{enumerate}
+    \end{itemize}
+
+  \item {\bf Case() }: Constructeur sans paramètre. Initialise une case vide.
+    
+  \end{enumerate}
+
+  \item Méthodes : 
+
+    \begin{enumerate}
+      
+    \item {\bf découvrir() }: mutateur de la propriété {\em découverte}. La case ne pouvant pas être rechachée, cette méthode est à sens unique.
+
+    \item {\bf marquer() }: mutateur de la propriété {\em marque}. À chaque appel de cette méthode, la marque passe successivement de «vide» à «bombe», à «inconnue» puis revient à «vide».
+    
+    \item {\bf estDécouverte() }: accesseur de la propriété {\em découverte}
+      \begin{itemize}
+      \item Retour : Vrai si et seulement si la case est découverte.
+          \begin{itemize}
+          \item Type de retour: boolean
+          \end{itemize}
+      \end{itemize}
+    
+    \item {\bf toString }: Retourne la représentation d'une case en chaîne de caractères. Si la case est découverte, il s'agit de la représentation de son type, sinon il s'agit de la représentation de sa marque.
+      \begin{itemize}
+      \item Retour : La représentation de la case en chaîne de caractères : son type si elle est découverte, sa marque sinon.
+          \begin{itemize}
+          \item Type de retour: String
+          \end{itemize}
+      \end{itemize}
+    \end{enumerate}
+    
+  \end{itemize}
+
