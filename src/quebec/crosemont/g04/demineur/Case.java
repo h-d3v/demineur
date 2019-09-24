@@ -1,4 +1,4 @@
-//package quebec.crosemont.g04.demineur;
+package quebec.crosemont.g04.demineur;
 import java.util.*;
 
 /* Classe Case du TP3 de Julien Jacquard, Riyad Trii & Hedi Ouahada
@@ -27,7 +27,7 @@ public class Case {
 				caractere="\u2B1C"; //carrer blanc
 				}
 			else if((this.name()).equals("BOMBE")){
-				caractere="\u2B1C"; //bombe
+				caractere="\uD83D\uDEA9"; //bombe
 				}
 			return caractere;
 		}
@@ -56,6 +56,13 @@ public class Case {
 			return caractere;
 			}
 	  }
+//Test des caracteres
+	  public static void main (String[] args) {
+		Marque marque = Marque.VIDE;
+		System.out.println(marque);
+		String charact=marque.VIDE.toString();
+		System.out.println("\uD83D\uDCA3");
+	}
 	
 }
 
