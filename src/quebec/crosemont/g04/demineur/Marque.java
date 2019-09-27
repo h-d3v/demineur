@@ -1,3 +1,20 @@
+/*enum Marque du TP3 de Julien Jacquard, Riyad Trii & Hedi Ouahada
+ * Jeu.java
+ *Enum représentant les différentes marques possibles sur une Case :
+0. VIDE
+1. BOMBE
+2. INCONNUE
+ * Copyright 2019 H <h@ubuntu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ *
+ */
+
+
 package quebec.crosemont.g04.demineur;
 
 enum Marque{
