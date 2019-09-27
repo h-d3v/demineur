@@ -11,7 +11,7 @@ enum Type {
             caractere="\u2B1C"; //carrer blanc
         }
         else if((this.name()).equals("BOMBE")){
-            caractere="\uD83D\uDEA9"; //bombe
+            caractere="\uD83D\uDCA3"; //bombe
         }
         return caractere;
     }

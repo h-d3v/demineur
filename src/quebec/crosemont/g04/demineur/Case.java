@@ -1,69 +1,47 @@
 package quebec.crosemont.g04.demineur;
-import java.util.*;
 
-/* Classe Case du TP3 de Julien Jacquard, Riyad Trii & Hedi Ouahada
- * Jeu.java
- * 
- * Copyright 2019 H <h@ubuntu>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * 
- */
- 
-public class Case {
-	//enum pour le type de case
-	enum Type {
-		VIDE,
-		BOMBE;
-	/* toString pour enum Type,
-	 * retourne le caractere a afficher selon le Type*/
-		public String toString(){
-			String caractere="";
-			if((this.name()).equals("VIDE")){
-				caractere="\u2B1C"; //carrer blanc
-				}
-			else if((this.name()).equals("BOMBE")){
-				caractere="\uD83D\uDEA9"; //bombe
-				}
-			return caractere;
-		}
-	  }
-	 
-	//enum pour la marque de la case
-	enum Marque{
-		VIDE, 
-		BOMBE,
-		INCONNU;
-	/* toString pour enum Marque,
-	* retourne la représentation d’une marque de Case,
-	* c’est-à-dire le caractère à afficher pour cette marque.*/
-		public String toString(){
-			
-			String caractere="";
-			if((this.name()).equals("VIDE")){
-				caractere="\u2B1C"; // carre blanc
-				}
-			else if((this.name()).equals("BOMBE")){
-				caractere="\uD83D\uDEA9"; // Drapeau rouge
-				}
-			else if((this.name()).equals("INCONNU")){
-				caractere="\u2753"; // Point d'interrogation
-				}
-			return caractere;
-			}
-	  }
-//Test des caracteres
-	  public static void main (String[] args) {
-		Marque marque = Marque.VIDE;
-		System.out.println(marque);
-		String charact=marque.VIDE.toString();
-		System.out.println("\uD83D\uDCA3");
-	}
-	
+public class Case{
+
+    //=================Proprietes=======================
+    protected Type type;
+    protected Marque marque;
+    protected boolean decouverte;
+    //=================Constructeurs==================
+    public Case(Type unType){
+        type=unType;
+        decouverte=false;
+        marque=Marque.VIDE;
+
+    }
+
+    public Case(){
+        type=Type.VIDE;
+        decouverte=false;
+        marque=Marque.VIDE;
+    }
+//=====================Methodes=======================
+
+    public void decouvrir(){
+        decouverte=true;
+    }
+    public void marquer(){
+        if(marque.name().equals("VIDE")) marque=Marque.BOMBE;
+        else if (marque.name().equals("BOMBE")) marque=Marque.INCONNU;
+        else marque=Marque.VIDE;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public Marque getMarque() {
+        return marque;
+    }
+
+    public String toString() {
+        String uneCase="";
+        if(decouverte) uneCase+=type.toString();
+        else uneCase+=marque.toString();
+        return uneCase;
+    }
 }
-
-
