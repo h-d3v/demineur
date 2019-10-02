@@ -103,23 +103,63 @@ class Grille{
         }
     }
 // A completer, doit decouvrir les cases voisines
-    public Type decouvrir(int x, int y){
+    public Type decouvrirVoisines(int x, int y){
         Type unType;
-        unType=cases[x][y].getType();
+        Case uneCase=cases[x][y];
+        unType=uneCase.getType();
         return unType;
     }
+    
+// Doit decouvrir la case aux cordonnees donnees
+    public Type decouvrir(int x, int y){
+        Type unType;
+        Case uneCase=cases[x][y];
+        uneCase.decouvrir();
+        unType=uneCase.getType();
+        return unType;
+    }
+    
+    //Methode qui marque la case aux coordonnee donnee
+	public Marque marquer(int x, int y){
+		Marque uneMarque;
+		Case uneCase=cases[x][y];
+		uneCase.marquer();
+		uneMarque=uneCase.getMarque();
+		return uneMarque;
+	}
+	
 //Methode qui revele toutes les cases
     public void toutReveler(){
         for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
-                cases[i][j].decouverte=true;
+                cases[i][j].decouvrir();
             }
         }
     }
+    
+
 // Methode qui vérifie que le jeu est réussi ou non.
-    //public boolean estReussi(){
-    //
-    // }
+    public boolean estReussi(){
+		boolean reussi=false;
+		int casesVides=0, casesVidesDecouvertes=0;
+		Case uneCase, uneCaseVide;
+		for(int i=0; i<cases.length; i++){
+            for(int j=0;j<cases[i].length;j++){
+                uneCase=cases[i][j];
+                if (uneCase.getType()==VIDE){
+					uneCaseVide=uneCase;
+					casesVides+=1;
+					}
+            }
+            if (uneCaseVide.estDecouverte()==true){
+				casesVideDecouvertes+=1;
+				}
+        }
+        if(casesVides==casesVidesDecouvertes){
+			reussi=true;
+			}
+		return reussi;
+    }
 
     public String toString(){
 	String res="   ";
