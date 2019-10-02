@@ -14,7 +14,7 @@ Le jeu doit se rapprocher le plus possible de la version classique pour Windows 
 
 C'est le code disponible sur votre divergence sur le gitlab du département au moment de la remise qui sera évaluée.
 
-Date de remise : 1er octobre 23h59
+Date de remise : 8 octobre 23h59
 
 
 ## Gestion du projet :
