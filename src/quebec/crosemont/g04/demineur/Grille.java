@@ -138,51 +138,44 @@ class Grille{
         }
         this.decouvrir(x, y);
     }
-// Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y ainsi que les cases voisines si celles ci sont vides
-    // A modifier doit decouvrir toutes les cases voisines qui sont vides ainsi
-    public void decouvrir(int x, int y){
+// Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
+    public Case decouvrir(int x, int y){
+        cases[x][y].decouvrir();
+        if(cases[x][y].type==Type.VIDE&&compterVoisins(x,y)==0 ) {
 
 
+            int ecartXMin = 1;
+            int ecartXMax = 1;
+            int ecartYMin = 1;
+            int ecartYMax = 1;
 
-        int ecartXMin=1;
-        int ecartXMax=1;
-        int ecartYMin=1;
-        int ecartYMax=1;
+            if (x == 0) ecartXMin = 0;
+            if (x == largeur - 1) ecartXMax = 0;
+            if (y == 0) ecartYMin = 0;
+            if (y == hauteur - 1) ecartYMax = 0;
 
-        if(x==0) ecartXMin=0;
-        if(x==largeur-1) ecartXMax=0;
-        if(y==0) ecartYMin=0;
-        if(y==hauteur-1) ecartYMax=0;
-
-            for(int i=x-ecartXMin; i<=x+ecartXMax;i++){
-                for (int j=y-ecartYMin; j<=y+ecartYMax; j++){
-                    if(cases[i][j].type==Type.VIDE && !cases[i][j].equals(cases[x][y])) {
+            for (int i = x - ecartXMin; i <= x + ecartXMax; i++) {
+                for (int j = y - ecartYMin; j <= y + ecartYMax; j++) {
+                    if (cases[i][j].type == Type.VIDE && !cases[i][j].decouverte&& compterVoisins(i, j)==0) {
+                        decouvrir(i, j);
+                    }
+                    else if (cases[i][j].type == Type.VIDE && !cases[i][j].decouverte&& compterVoisins(i, j)>=0){
                         cases[i][j].decouvrir();
                     }
 
-                }
-            }/*
-       for(int i=x-1;i<=x+1;i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
-                try {
-                    if(cases[i][j].type==unType.VIDE) {
-                        cases[i][j].decouverte=true;
-                        decouvrir(i,j);
-                    }
-                } catch (ArrayIndexOutOfBoundsException ignored) {
-                }
 
+                }
             }
-        }*/
-
+        }
+        return cases[x][y];
     }
 //Methode qui revele toutes les cases Bombes
     public void toutReveler(){
         for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
-               // if (cases[i][j].getType() == Type.BOMBE) {
+                if (cases[i][j].getType() == Type.BOMBE) {
                     cases[i][j].decouverte=true;
-               // }
+                }
 
             }
         }
