@@ -5,7 +5,7 @@ public class Test {
         System.out.println("Init de 10/10, construteur Grille()");
         Grille uneGrille= new Grille();
         System.out.println("init 1st");
-        uneGrille.initialiser(1,1,20);
+        uneGrille.initialiser(-1,-1,20);
         System.out.println(uneGrille);
 
         System.out.println("Test unitaire de la fonction compterVoisins() pour les cases8-7 9-9 0-0 \n");
@@ -18,9 +18,19 @@ public class Test {
         System.out.println(uneGrille);
         uneGrille.cases[1][1].marquer();
         System.out.println(uneGrille);
-
-        uneGrille.cases[1][1].marquer();
+        System.out.println("=======================Decoucrir 0,0 no bombe====================");
+        uneGrille.decouvrir(0,0);
         System.out.println(uneGrille);
+
+        uneGrille.cases[2][2].marquer();
+        System.out.println(uneGrille);
+        uneGrille.cases[2][2].marquer();
+        System.out.println(uneGrille);
+        System.out.println("=======================Decoucrir 2,2 no bombe====================");
+
+        uneGrille.decouvrir(2,2);
+        System.out.println(uneGrille);
+
         System.out.println("Test unitaire de la fonction toutReveler()");
         uneGrille.toutReveler();
         System.out.println(uneGrille);

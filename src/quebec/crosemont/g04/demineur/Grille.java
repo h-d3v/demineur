@@ -59,14 +59,27 @@ class Grille{
 //methode qui etourne la représentation en chaine de caractere d’une Case
 //sur la Grille.
     public String getFaceCase(int x, int y){
-
         String faceCase=cases[x][y].toString();
-        return faceCase;
+        if (cases[x][y].decouverte && cases[x][y].getType()!=Type.BOMBE){
+            faceCase=" ";
+            if(compterVoisins(x,y)>0){
+                faceCase+=compterVoisins(x,y);
+            }else faceCase+=" ";
+        }
+
+            return faceCase;
     }
+
+
 //Retourne le nombre de voisins d’une
 //case sur lesquels se trouvent une bombe
     public int compterVoisins(int x, int y){
         int compteur=0;
+            assert x>=0;
+            assert  y>=0;
+            assert x<largeur;
+            assert y<hauteur;
+
             for(int i=x-1;i<=x+1;i++){
                 for(int j=y-1; j<=y+1;j++){
                     try{
@@ -84,14 +97,20 @@ class Grille{
 
 
     public void  initialiser(int x, int y, int nbBombes){
+        assert x>=0;
+        assert  y>=0;
+        assert x<largeur;
+        assert y<hauteur;
         Random gen=new Random(1);// Le seed Random est pour les tests seulement, a retirer pour la version finale
         int xx, yy;
+
         //Remplir les cases de la grille avec les objets Case
         for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
                 cases[i][j]=new Case();
             }
         }
+
         while(nbBombes!=0){
             //initialiation des coordonnees de la case a peupler par une bombe
             xx=gen.nextInt(largeur);
@@ -100,19 +119,37 @@ class Grille{
                 cases[xx][yy].type=Type.BOMBE;
                 nbBombes--;
             }
+
         }
+        this.decouvrir(x, y);
     }
 // A completer, doit decouvrir les cases voisines
     public Type decouvrir(int x, int y){
         Type unType;
+
+        cases[x][y].decouverte=true;
         unType=cases[x][y].getType();
+        for(int i=x-1;i<=x+1;i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
+                try {
+                    if(cases[i][j].type==unType.VIDE) {
+                        cases[i][j].decouverte=true;
+                    }
+                } catch (ArrayIndexOutOfBoundsException ignored) {
+                }
+
+            }
+        }
         return unType;
     }
 //Methode qui revele toutes les cases
     public void toutReveler(){
         for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
-                cases[i][j].decouverte=true;
+                if (cases[i][j].getType() == Type.BOMBE) {
+                    cases[i][j].decouverte=true;
+                }
+
             }
         }
     }
