@@ -74,19 +74,34 @@ class Grille{
 //Retourne le nombre de voisins d’une
 //case sur lesquels se trouvent une bombe
     public int compterVoisins(int x, int y){
+        assert x>=0;
+        assert  y>=0;
+        assert x<largeur;
+        assert y<hauteur;
         int compteur=0;
-            assert x>=0;
-            assert  y>=0;
-            assert x<largeur;
-            assert y<hauteur;
+        int ecartXMin=1;
+        int ecartXMax=1;
+        int ecartYMin=1;
+        int ecartYMax=1;
 
-            for(int i=x-1;i<=x+1;i++){
+        if(x==0) ecartXMin=0;
+        if(x==largeur-1) ecartXMax=0;
+        if(y==0) ecartYMin=0;
+        if(y==hauteur-1) ecartYMax=0;
+
+        for(int i=x-ecartXMin; i<=x+ecartXMax;i++){
+            for (int j=y-ecartYMin; j<=y+ecartYMax; j++){
+                if (cases[i][j].type==Type.BOMBE) compteur++;
+            }
+        }
+
+            /*for(int i=x-1;i<=x+1;i++){
                 for(int j=y-1; j<=y+1;j++){
                     try{
                         if (cases[i][j].type==Type.BOMBE) compteur++;}
                     catch (ArrayIndexOutOfBoundsException ignored){}
                 }
-            }
+            }*/
         return compteur;
     }
 //Constitue la grille de Cases aléatoire-
@@ -123,32 +138,51 @@ class Grille{
         }
         this.decouvrir(x, y);
     }
-// A completer, doit decouvrir les cases voisines
-    public Type decouvrir(int x, int y){
-        Type unType;
+// Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y ainsi que les cases voisines si celles ci sont vides
+    // A modifier doit decouvrir toutes les cases voisines qui sont vides ainsi
+    public void decouvrir(int x, int y){
 
-        cases[x][y].decouverte=true;
-        unType=cases[x][y].getType();
-        for(int i=x-1;i<=x+1;i++) {
+
+
+        int ecartXMin=1;
+        int ecartXMax=1;
+        int ecartYMin=1;
+        int ecartYMax=1;
+
+        if(x==0) ecartXMin=0;
+        if(x==largeur-1) ecartXMax=0;
+        if(y==0) ecartYMin=0;
+        if(y==hauteur-1) ecartYMax=0;
+
+            for(int i=x-ecartXMin; i<=x+ecartXMax;i++){
+                for (int j=y-ecartYMin; j<=y+ecartYMax; j++){
+                    if(cases[i][j].type==Type.VIDE && !cases[i][j].equals(cases[x][y])) {
+                        cases[i][j].decouvrir();
+                    }
+
+                }
+            }/*
+       for(int i=x-1;i<=x+1;i++) {
             for (int j = y - 1; j <= y + 1; j++) {
                 try {
                     if(cases[i][j].type==unType.VIDE) {
                         cases[i][j].decouverte=true;
+                        decouvrir(i,j);
                     }
                 } catch (ArrayIndexOutOfBoundsException ignored) {
                 }
 
             }
-        }
-        return unType;
+        }*/
+
     }
-//Methode qui revele toutes les cases
+//Methode qui revele toutes les cases Bombes
     public void toutReveler(){
         for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
-                if (cases[i][j].getType() == Type.BOMBE) {
+               // if (cases[i][j].getType() == Type.BOMBE) {
                     cases[i][j].decouverte=true;
-                }
+               // }
 
             }
         }
