@@ -139,8 +139,11 @@ class Grille{
         this.decouvrir(x, y);
     }
 // Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
-    public Case decouvrir(int x, int y){
-        cases[x][y].decouvrir();
+    public Type decouvrir(int x, int y){
+		Case uneCase=cases[x][y];
+        uneCase.decouvrir();
+        unType=uneCase.getType();
+        
         if(cases[x][y].type==Type.VIDE&&compterVoisins(x,y)==0 ) {
 
 
@@ -167,8 +170,21 @@ class Grille{
                 }
             }
         }
-        return cases[x][y];
+        
+        return unType;
     }
+    
+    
+//Methode qui marque la case aux coordonnee donnee
+	public Marque marquer(int x, int y) {
+		Marque uneMarque;
+		Case uneCase=cases[x][y];
+		uneCase.marquer();
+		uneMarque=uneCase.getMarque();
+		return uneMarque;
+	}
+	
+
 //Methode qui revele toutes les cases Bombes
     public void toutReveler(){
         for(int i=0; i<cases.length; i++){
@@ -180,10 +196,42 @@ class Grille{
             }
         }
     }
-// Methode qui vérifie que le jeu est réussi ou non.
-    //public boolean estReussi(){
-    //
-    // }
+
+
+/* Doit decouvrir la case aux cordonnees donnees, mit en commentaire,
+ * voir decouvrir en haut pour la version complete.
+    public Type decouvrir(int x, int y){
+        Type unType;
+        Case uneCase=cases[x][y];
+        uneCase.decouvrir();
+        unType=uneCase.getType();
+        return unType;
+    }*/
+
+//Verifie si toute les cases du jeux sont decouvertes
+public boolean estReussi(){
+		boolean reussi=false;
+		int casesVides=0, casesVidesDecouvertes=0;
+		Case uneCase, uneCaseVide;
+		for(int i=0; i<cases.length; i++){
+            for(int j=0;j<cases[i].length;j++){
+                uneCase=cases[i][j];
+                if (uneCase.getType()==VIDE){
+					uneCaseVide=uneCase;
+					casesVides+=1;
+					}
+            }
+            if (uneCaseVide.estDecouverte()==true){
+				casesVideDecouvertes+=1;
+				}
+        }
+        if(casesVides==casesVidesDecouvertes){
+			reussi=true;
+			}
+		return reussi;
+    }
+
+//methode toString de la grille
 
     public String toString(){
 	String res="   ";
