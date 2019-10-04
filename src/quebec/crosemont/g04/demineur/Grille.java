@@ -142,7 +142,7 @@ class Grille{
     public Type decouvrir(int x, int y){
 		Case uneCase=cases[x][y];
         uneCase.decouvrir();
-        unType=uneCase.getType();
+        Type unType=uneCase.getType();
         
         if(cases[x][y].type==Type.VIDE&&compterVoisins(x,y)==0 ) {
 
@@ -212,17 +212,18 @@ class Grille{
 public boolean estReussi(){
 		boolean reussi=false;
 		int casesVides=0, casesVidesDecouvertes=0;
-		Case uneCase, uneCaseVide;
+		Case uneCase, uneCaseVide=new Case();
+
 		for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
                 uneCase=cases[i][j];
-                if (uneCase.getType()==VIDE){
+                if (uneCase.getType()==Type.VIDE){
 					uneCaseVide=uneCase;
 					casesVides+=1;
 					}
             }
-            if (uneCaseVide.estDecouverte()==true){
-				casesVideDecouvertes+=1;
+            if (uneCaseVide.decouverte==true){
+				casesVidesDecouvertes+=1;
 				}
         }
         if(casesVides==casesVidesDecouvertes){
