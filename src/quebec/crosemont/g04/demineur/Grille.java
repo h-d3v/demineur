@@ -21,7 +21,7 @@ import java.util.Random;
 class Grille{
 
     //=======================Proprietes================================
-    private int largeur, hauteur;
+    protected int largeur, hauteur;
     protected Case[][] cases;
     //=================Constructeurs====================================
 
@@ -58,7 +58,7 @@ class Grille{
     }
 //methode qui etourne la représentation en chaine de caractere d’une Case
 //sur la Grille.
-    public String getFaceCase(int x, int y){
+    protected String getFaceCase(int x, int y){
         String faceCase=cases[x][y].toString();
         if (cases[x][y].decouverte && cases[x][y].getType()!=Type.BOMBE){
             faceCase=" ";
@@ -73,7 +73,7 @@ class Grille{
 
 //Retourne le nombre de voisins d’une
 //case sur lesquels se trouvent une bombe
-    public int compterVoisins(int x, int y){
+    protected int compterVoisins(int x, int y){
         assert x>=0;
         assert  y>=0;
         assert x<largeur;
@@ -222,7 +222,7 @@ public boolean estReussi(){
 					casesVides+=1;
 					}
             }
-            if (uneCaseVide.decouverte==true){
+            if (uneCaseVide.estDecouverte()==true){
 				casesVidesDecouvertes+=1;
 				}
         }

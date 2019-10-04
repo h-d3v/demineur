@@ -42,6 +42,8 @@ public class Case{
     public void decouvrir(){
         decouverte=true;
     }
+
+
 /*
 mutateur de la propriété marque. À chaque appel
 de cette méthode, la marque passe successivement de «vide» à
@@ -60,6 +62,10 @@ de cette méthode, la marque passe successivement de «vide» à
 
     public Marque getMarque() {
         return marque;
+    }
+
+    public boolean estDecouverte(){
+        return decouverte;
     }
 
     public String toString() {
