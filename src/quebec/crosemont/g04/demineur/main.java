@@ -4,7 +4,7 @@
  * 
  * 
  */
- 
+//package quebec.crosemont.g04.demineur;
 import java.util.Random;
 import java.util.*;
 import java.io.*;
@@ -51,9 +51,40 @@ public class main{
 			nbCases=largeur*hauteur;
 			
 	}
-		Grille GrilleJeu=new Grille(largeur,hauteur);
-		Case[][] casesJeu=GrilleJeu.cases;
+		Grille grilleJeu=new Grille(largeur,hauteur);
 		int nbBombe=(largeur*hauteur)/10;
+		int entreeX=0,entreeY=0;
+		erreurEntree=true;
+		do{
+				try{
+					System.out.println("Veuillez entrez le X de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
+					entreeX= Integer.parseInt(in.next());
+					System.out.println("Veuillez entrez le Y de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
+					entreeY= Integer.parseInt(in.next());
+					erreurEntree=false;
+				}catch(NumberFormatException e){
+					System.out.println("\n Veuillez entree un numero entier positif svp \n");
+					in.reset();
+					}  
+				} while(erreurEntree);
+		
+		while(entreeX>=largeur || entreeY>=hauteur){
+			do{
+				try{
+					System.out.println("Veuillez entrez le X de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
+					largeur = Integer.parseInt(in.next());
+					System.out.println("Veuillez entrez la hauteur de grille choisie: ");
+					hauteur = Integer.parseInt(in.next());
+					erreurEntree=false;
+				}catch(NumberFormatException e){
+					System.out.println("\n Veuillez entree un numero entier positif svp \n");
+					in.reset();
+					}  
+				} while(erreurEntree);
+		}
+		grilleJeu.initialiser(entreeX,entreeY,nbBombe);
+		System.out.println(grilleJeu.toString());
+		
 		
 	}
 }
