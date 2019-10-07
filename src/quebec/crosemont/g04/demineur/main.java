@@ -4,7 +4,7 @@
  * 
  * 
  */
-//package quebec.crosemont.g04.demineur;
+package quebec.crosemont.g04.demineur;
 import java.util.Random;
 import java.util.*;
 import java.io.*;
@@ -52,7 +52,7 @@ public class main{
 			
 	}
 		Grille grilleJeu=new Grille(largeur,hauteur);
-		int nbBombe=(largeur*hauteur)/10+1;
+		int nbBombe=10;
 		int entreeX=0,entreeY=0;
 		erreurEntree=true;
 		// tant que le joueur ne rentre pas un X et un Y valide, la grille ne sera pas initialiser.
