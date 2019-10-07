@@ -52,9 +52,10 @@ public class main{
 			
 	}
 		Grille grilleJeu=new Grille(largeur,hauteur);
-		int nbBombe=(largeur*hauteur)/10;
+		int nbBombe=(largeur*hauteur)/10+1;
 		int entreeX=0,entreeY=0;
 		erreurEntree=true;
+		// tant que le joueur ne rentre pas un X et un Y valide, la grille ne sera pas initialiser.
 		do{
 				try{
 					System.out.println("Veuillez entrez le X de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
@@ -77,17 +78,82 @@ public class main{
 					hauteur = Integer.parseInt(in.next());
 					erreurEntree=false;
 				}catch(NumberFormatException e){
-					System.out.println("\n Veuillez entree un numero entier positif svp \n");
+					System.out.println("\n Veuillez entrer un numero entier positif svp \n");
 					in.reset();
 					}  
 				} while(erreurEntree);
 		}
 		grilleJeu.initialiser(entreeX,entreeY,nbBombe);
 		System.out.println(grilleJeu.toString());
-		
-		
+		String[] chaineTable;
+		String  chaine="",option="";
+		int x=0,y=0;
+		boolean partieReussie=false,partiePerdue=false,partieEnCours=true;
+		//Tant que la partie n'est pas finie, cette boucle se repete.
+		while (partieEnCours){
+			erreurEntree=true;
+			while(erreurEntree){
+				try{
+					System.out.println("Veuillez entrez la prochaine action, \n m ou d suivi du x ou y de la case (A-X-Y): ");
+					chaine=in.next();
+					chaineTable=chaine.split("-");
+					System.out.println(chaine);
+					option=chaineTable[0];
+					x = Integer.parseInt(chaineTable[1]);
+					y = Integer.parseInt(chaineTable[2]);
+					erreurEntree=false;
+					if(x<0||x>largeur||y<0||y>largeur){
+						System.out.println("\n Veuillez entrer l'action(m ou d), suivie d'un X et d'un Y valide de la grille SVP \n SEPARER PAR DES TIRETS (-)");
+						erreurEntree=true;
+					}
+				}catch(NumberFormatException e){
+					System.out.println("\n Veuillez entrer l'action(m ou d), suivie d'un X et d'un Y valide de la grille SVP \n SEPARER PAR DES TIRETS (-)");
+					in.reset();
+				}
+				//facon alternative de corriger la mauvaise entree des elements de la chaine de caracteres
+				catch(ArrayIndexOutOfBoundsException e){
+					System.out.println("\n Veuillez entrer l'action(m ou d), suivie d'un X et d'un Y valide SVP \n SEPARER PAR DES TIRETS (-)");
+					in.reset();
+				}
+			
+			}
+			
+			if(option.equals("m") || option.equals("M")){
+				
+				Marque  uneMarque=grilleJeu.marquer(x,y);
+				
+			}
+			else if(option.equals("d") || option.equals("D")){
+				Type unType=grilleJeu.decouvrir(x,y);
+				if (unType==Type.BOMBE){
+					partieEnCours=false;
+					grilleJeu.toutReveler();
+					}
+				else{
+					partieReussie=grilleJeu.estReussi();
+					if(partieReussie){
+						partieEnCours=false;
+						grilleJeu.toutReveler();
+						}
+					}
+				}
+			
+			//else{System.out.println("Entrez une action valide (m ou d) SVP");}
+			
+			System.out.println(grilleJeu.toString());
+			
+		//Si la partie est perdue
+		if (partieReussie==false){
+			System.out.println("Partie PERDUE \n redemarrer le jeu pour essayer de nouveau");
+		}
+		else if(partieReussie){
+			System.out.println("BRAVO \n VOUS ETES VAINQUEUR");
+		}
+		}
 	}
 }
+
+
 	
 		
 
