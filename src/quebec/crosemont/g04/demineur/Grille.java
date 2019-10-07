@@ -130,9 +130,11 @@ class Grille{
             //initialiation des coordonnees de la case a peupler par une bombe
             xx=gen.nextInt(largeur);
             yy=gen.nextInt(hauteur);
-            if(!cases[xx][yy].type.equals(Type.BOMBE) || !(xx==x && yy==y)){
-                cases[xx][yy].type=Type.BOMBE;
-                nbBombes--;
+            if( !(xx==x && yy==y)) {
+                if (!cases[xx][yy].type.equals(Type.BOMBE)) {
+                    cases[xx][yy].type = Type.BOMBE;
+                    nbBombes--;
+                }
             }
 
         }
