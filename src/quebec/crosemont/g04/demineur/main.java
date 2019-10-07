@@ -58,9 +58,9 @@ public class main{
 		// tant que le joueur ne rentre pas un X et un Y valide, la grille ne sera pas initialiser.
 		do{
 				try{
-					System.out.println("Veuillez entrez le X de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
+					System.out.println("Veuillez entrez le X de la case choisie \n(doit etre entre 0 et la largeur de la grille-1): ");
 					entreeX= Integer.parseInt(in.next());
-					System.out.println("Veuillez entrez le Y de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
+					System.out.println("Veuillez entrez le Y de la case choisie \n(doit etre entre 0 et la largeur de la grille-1): ");
 					entreeY= Integer.parseInt(in.next());
 					erreurEntree=false;
 				}catch(NumberFormatException e){
@@ -68,14 +68,16 @@ public class main{
 					in.reset();
 					}  
 				} while(erreurEntree);
+				
 		
-		while(entreeX>=largeur || entreeY>=hauteur){
+		while(entreeX>=largeur || entreeY>=hauteur || entreeX<0 || entreeY<0){
+			erreurEntree=true;
 			do{
 				try{
-					System.out.println("Veuillez entrez le X de la case choisie \n (doit etre entre 0 et la largeur de la grille-1): ");
-					largeur = Integer.parseInt(in.next());
-					System.out.println("Veuillez entrez la hauteur de grille choisie: ");
-					hauteur = Integer.parseInt(in.next());
+					System.out.println("Veuillez entrez le X de la case choisie \n(doit etre entre 0 et la largeur de la grille-1): ");
+					entreeX = Integer.parseInt(in.next());
+					System.out.println("Veuillez entrez le Y de la case choisie \n(doit etre entre 0 et la largeur de la grille-1): ");
+					entreeY = Integer.parseInt(in.next());
 					erreurEntree=false;
 				}catch(NumberFormatException e){
 					System.out.println("\n Veuillez entrer un numero entier positif svp \n");
@@ -130,26 +132,30 @@ public class main{
 					grilleJeu.toutReveler();
 					}
 				else{
+					
 					partieReussie=grilleJeu.estReussi();
 					if(partieReussie){
 						partieEnCours=false;
 						grilleJeu.toutReveler();
-						}
+						} 
 					}
 				}
 			
-			//else{System.out.println("Entrez une action valide (m ou d) SVP");}
+			else System.out.println("\nEntrez une action valide (m ou d) SVP\n");
 			
 			System.out.println(grilleJeu.toString());
 			
+		
+	}
 		//Si la partie est perdue
 		if (partieReussie==false){
 			System.out.println("Partie PERDUE \n redemarrer le jeu pour essayer de nouveau");
 		}
+		//Si le partie est gagnee
 		else if(partieReussie){
 			System.out.println("BRAVO \n VOUS ETES VAINQUEUR");
 		}
-		}
+		
 	}
 }
 
