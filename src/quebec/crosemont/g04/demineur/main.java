@@ -4,7 +4,8 @@
  * 
  * 
  */
- 
+package quebec.crosemont.g04.demineur;
+
 import java.util.Random;
 import java.util.*;
 import java.io.*;
