@@ -51,14 +51,23 @@ class Grille{
         return hauteur;
     }
 
-    public Case getCase(int x, int y){
+    public Case getCase(int x, int y) throws IllegalArgumentException{
+        if(x>largeur || x<0 || y>hauteur || y<0) {
+            throw new IllegalArgumentException("Les coordonees doivent etre comprises entre 0 et " + largeur + "pour la largeur 0 et" +
+                    hauteur + "pour la hauteur");
+        }
         Case uneCase;
             uneCase=cases[x][y];
         return uneCase;
     }
 //methode qui etourne la représentation en chaine de caractere d’une Case
 //sur la Grille.
-    protected String getFaceCase(int x, int y){
+    protected String getFaceCase(int x, int y) throws IllegalArgumentException{
+        if(x>largeur || x<0 || y>hauteur || y<0){
+            throw new IllegalArgumentException("Les coordonees doivent etre comprises entre 0 et "+largeur+ "pour la largeur 0 et"+
+                    hauteur+"pour la hauteur"
+            );
+        }
         String faceCase=cases[x][y].toString();
         if (cases[x][y].decouverte && cases[x][y].getType()!=Type.BOMBE){
             faceCase=" ";
@@ -111,7 +120,12 @@ class Grille{
     //!!!!!!!Prends pas en compte que la case (x,y ) est vide ni la gestion d'erreur de l'attribut nbBombes !!!!!!!!!!!!!!!!!
 
 
-    public void  initialiser(int x, int y, int nbBombes){
+    public void  initialiser(int x, int y, int nbBombes) throws IllegalArgumentException{
+        if(x>largeur || x<0 || y>hauteur || y<0) {
+            throw new IllegalArgumentException("Les coordonees doivent etre comprises entre 0 et " + largeur + "pour la largeur 0 et" +
+                    hauteur + "pour la hauteur");
+        }
+        if(nbBombes>=largeur*hauteur) throw new IllegalArgumentException("Le nombre de bombes doit etre inferieur au nommbre de cases de la grille");
         assert x>=0;
         assert  y>=0;
         assert x<largeur;
@@ -142,6 +156,10 @@ class Grille{
     }
 // Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
     public Type decouvrir(int x, int y){
+        assert x>=0;
+        assert  y>=0;
+        assert x<largeur;
+        assert y<hauteur;
 		Case uneCase=cases[x][y];
 		if(uneCase.getType()==Type.VIDE) {
             uneCase.decouvrir();
@@ -179,6 +197,10 @@ class Grille{
     
 //Methode qui marque la case aux coordonnee donnee
 	public Marque marquer(int x, int y) {
+        assert x>=0;
+        assert  y>=0;
+        assert x<largeur;
+        assert y<hauteur;
 		Marque uneMarque;
 		Case uneCase=cases[x][y];
 		uneCase.marquer();
