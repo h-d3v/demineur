@@ -80,9 +80,14 @@ class Grille{
     }
 
 
-//Retourne le nombre de voisins d’une
-//case sur lesquels se trouvent une bombe
-    protected int compterVoisins(int x, int y){
+/*
+Retourne le nombre de voisins d’une
+case de coordonnees(x,y), sur lesquels se trouvent une bombe
+@param: int x : la coordonee x representant la largeur
+@param y : la coordonee y representant la largeur
+@return  int nbBombes le nombres de bombes sur les cases entourant la case de coordonnee x,y
+*/
+protected int compterVoisins(int x, int y){
         assert x>=0;
         assert  y>=0;
         assert x<largeur;
@@ -113,11 +118,13 @@ class Grille{
             }*/
         return compteur;
     }
-//Constitue la grille de Cases aléatoire-
-//ment, sachant que la case aux coordonnées (x,y) doit être vide.
-
-
-    //!!!!!!!Prends pas en compte que la case (x,y ) est vide ni la gestion d'erreur de l'attribut nbBombes !!!!!!!!!!!!!!!!!
+/*
+Constitue la grille de Cases aléatoire-
+ment, sachant que la case aux coordonnées (x,y) doit être vide.
+@param int x : la coordonee x representant la largeur
+@param int y : la coordonee y representant la largeur
+@param int nbBombes : le nombre de bombes a placer dans la grille
+*/
 
 
     public void  initialiser(int x, int y, int nbBombes) throws IllegalArgumentException{
@@ -126,6 +133,7 @@ class Grille{
                     hauteur + "pour la hauteur");
         }
         if(nbBombes>=largeur*hauteur) throw new IllegalArgumentException("Le nombre de bombes doit etre inferieur au nommbre de cases de la grille");
+        assert nbBombes>=0;
         assert x>=0;
         assert  y>=0;
         assert x<largeur;
@@ -154,7 +162,12 @@ class Grille{
         }
         this.decouvrir(x, y);
     }
-// Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
+/* Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
+* @param int x : la coordonee x representant la largeur
+*@param int y : la coordonee y representant la largeur
+* @return Type : le Type de case
+*
+* */
     public Type decouvrir(int x, int y){
         assert x>=0;
         assert  y>=0;
@@ -195,8 +208,14 @@ class Grille{
     }
     
     
-//Methode qui marque la case aux coordonnee donnee
-	public Marque marquer(int x, int y) {
+/*
+    Methode qui marque la case aux coordonnee donnee
+    * @param int x : la coordonee x representant la largeur
+    *@param int y : la coordonee y representant la largeur
+    *@return Marque unMarque : la marque de la case correspondante
+
+    */
+public Marque marquer(int x, int y) {
         assert x>=0;
         assert  y>=0;
         assert x<largeur;
@@ -232,7 +251,10 @@ class Grille{
         return unType;
     }*/
 
-//Verifie si toute les cases du jeux sont decouvertes
+/* Methode qui erifie si toutes les cases du jeux sont decouvertes
+* @return  boolean reussi : le booleen reussi retourne true si la partie est gagnee
+*
+* */
 public boolean estReussi(){
 		boolean reussi=false;
 		int casesBombes=0, casesDecouvertes=0;
