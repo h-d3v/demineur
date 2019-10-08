@@ -143,7 +143,9 @@ class Grille{
 // Fonction qui decouvre(passe l'attribut decouverte a true) une case de coordonee x,y et decouvre toutes les cases vides liees entre elles et decouvrent les cases adjacentes a une bombe
     public Type decouvrir(int x, int y){
 		Case uneCase=cases[x][y];
-        uneCase.decouvrir();
+		if(uneCase.getType()==Type.VIDE) {
+            uneCase.decouvrir();
+        }
         Type unType=uneCase.getType();
         
         if(cases[x][y].type==Type.VIDE&&compterVoisins(x,y)==0 ) {
@@ -227,7 +229,7 @@ public boolean estReussi(){
         if(casesDecouvertes==largeur*hauteur-casesBombes){
 			reussi=true;
 			}
-    System.out.println("casesBombes "+casesBombes+ "casesVidesDecouvertes "+casesDecouvertes+"reussi : "+reussi);//Pour tests
+    //System.out.println("casesBombes "+casesBombes+ "casesVidesDecouvertes "+casesDecouvertes+"reussi : "+reussi);//Pour tests
 		return reussi;
     }
 
