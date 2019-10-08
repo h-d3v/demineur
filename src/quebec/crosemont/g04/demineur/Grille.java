@@ -211,24 +211,23 @@ class Grille{
 //Verifie si toute les cases du jeux sont decouvertes
 public boolean estReussi(){
 		boolean reussi=false;
-		int casesVides=0, casesVidesDecouvertes=0;
-		Case uneCase, uneCaseVide=new Case();
+		int casesBombes=0, casesDecouvertes=0;
+
 
 		for(int i=0; i<cases.length; i++){
             for(int j=0;j<cases[i].length;j++){
-                uneCase=cases[i][j];
-                if (uneCase.getType()==Type.VIDE){
-					uneCaseVide=uneCase;
-					casesVides+=1;
+                if (cases[i][j].getType()==Type.BOMBE){
+					casesBombes+=1;
 					}
+                if (cases[i][j].estDecouverte()){
+                    casesDecouvertes++;
+                }
             }
-            if (uneCaseVide.estDecouverte()==true){
-				casesVidesDecouvertes+=1;
-				}
         }
-        if(casesVides==casesVidesDecouvertes){
+        if(casesDecouvertes==largeur*hauteur-casesBombes){
 			reussi=true;
 			}
+    System.out.println("casesBombes "+casesBombes+ "casesVidesDecouvertes "+casesDecouvertes+"reussi : "+reussi);//Pour tests
 		return reussi;
     }
 

@@ -4,10 +4,11 @@
  * 
  * 
  */
-//package quebec.crosemont.g04.demineur;
+package quebec.crosemont.g04.demineur;
 import java.util.Random;
 import java.util.*;
 import java.io.*;
+
 
 public class main{
 	
@@ -52,7 +53,7 @@ public class main{
 			
 	}
 		Grille grilleJeu=new Grille(largeur,hauteur);
-		int nbBombe=(largeur*hauteur)/10+1;
+		int nbBombe=1;
 		int entreeX=0,entreeY=0;
 		erreurEntree=true;
 		// tant que le joueur ne rentre pas un X et un Y valide, la grille ne sera pas initialiser.
@@ -94,6 +95,9 @@ public class main{
 		//Tant que la partie n'est pas finie, cette boucle se repete.
 		while (partieEnCours){
 			erreurEntree=true;
+			if(grilleJeu.estReussi()){
+				partieEnCours=false;
+			}
 			while(erreurEntree){
 				try{
 					System.out.println("Veuillez entrez la prochaine action, \n m ou d suivi du x ou y de la case (A-X-Y): ");
@@ -131,15 +135,8 @@ public class main{
 					partieEnCours=false;
 					grilleJeu.toutReveler();
 					}
-				else{
-					
-					partieReussie=grilleJeu.estReussi();
-					if(partieReussie){
-						partieEnCours=false;
-						grilleJeu.toutReveler();
-						} 
-					}
-				}
+
+			}
 			
 			else System.out.println("\nEntrez une action valide (m ou d) SVP\n");
 			
@@ -152,7 +149,7 @@ public class main{
 			System.out.println("Partie PERDUE \n redemarrer le jeu pour essayer de nouveau");
 		}
 		//Si le partie est gagnee
-		else if(partieReussie){
+		else{
 			System.out.println("BRAVO \n VOUS ETES VAINQUEUR");
 		}
 		
