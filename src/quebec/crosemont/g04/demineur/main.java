@@ -38,12 +38,24 @@ public class main{
 		Grille grilleJeu=new Grille(largeur,hauteur);
 		int nbBombe=(largeur*hauteur)/10+1;
 		int entreeX=0,entreeY=0;
+		
+		  //creation d'une grille vierge pour le premier affichage
+		Grille grilleVierge= new Grille(largeur,hauteur);
+        for(int i=0; i<grilleVierge.cases.length; i++){
+            for(int j=0;j<grilleVierge.cases[i].length;j++){
+                grilleVierge.cases[i][j]=new Case();
+            }
+        }
+		
 
 		// tant que le joueur ne rentre pas un X et un Y valide, la grille ne sera pas initialiser.
 
 		do{
+			//affichage dela grille vierge
+			System.out.println(grilleVierge.toString());
 			System.out.println("Veuillez entrez le X pour debuter le jeu: ");
 			while (!in.hasNextInt()) {
+				System.out.println(grilleVierge.toString());
 				System.out.println("Cela ne peut etre un X valide");
 				System.out.println("Veuillez un X valide pour debuter le jeu: ");
 				in.next();
@@ -51,24 +63,27 @@ public class main{
 			entreeX = in.nextInt();
 			System.out.println("Veuillez entrez un Y valide pour debuter le jeu: ");
 			while (!in.hasNextInt()) {
+				 System.out.println(grilleVierge.toString());
 				System.out.println("Cela ne peut etre un Y valide");
 				System.out.println("Veuillez entrez le Y pour debuter le jeu: ");
 				in.next();
 			}
 			entreeY=in.nextInt();
+			if  (entreeX<0 || entreeX>largeur-1 || entreeY<0 || entreeY>hauteur-1) System.out.println("Veuillez entrez une coordonnee valide SVP"); ;
 		} while (entreeX<0 || entreeX>largeur-1 || entreeY<0 || entreeY>hauteur-1);
 
 		grilleJeu.initialiser(entreeX,entreeY,nbBombe);
-		System.out.println(grilleJeu.toString());
 		String[] chaineTable;
 		String  chaine="",option="";
 		int x=0,y=0;
+
 		boolean partieEnCours=true, matches=false;
 		//new Pattern chainePattern = Pattern.compile("[md](-)[0-9]*(-)[0-9]*");
 		String pattern = "[md](-)[0-9]*(-)[0-9]*";
 
 		//Tant que la partie n'est pas finie, cette boucle se repete.
 		while (partieEnCours){
+			System.out.println(grilleJeu.toString());
 			do{
 				matches=false;
 				while(matches==false){
@@ -81,10 +96,10 @@ public class main{
 						option=chaineTable[0];
 						x = Integer.parseInt(chaineTable[1]);
 						y = Integer.parseInt(chaineTable[2]);
-						if(x>=largeur||y>=hauteur) System.out.println("Entrez une coordonne qui se trouve dans la grille SVP");
+						if(x>=largeur||y>=hauteur) System.out.println(grilleJeu.toString()+"\nEntrez une coordonne qui se trouve dans la grille SVP");
 
 					}
-					else System.out.println("Entrez une commande valide  \n "+ grilleJeu.toString()+"\n  m ou d suivi du x ou y de la case (A-X-Y): ");
+					else System.out.println(grilleJeu.toString()+"\nEntrez une commande valide soit m ou d suivi du x ou y de la case (A-X-Y): ");
 				}
 
 
@@ -104,8 +119,9 @@ public class main{
 			}
 
 			else System.out.println("\nEntrez une action valide (m ou d) SVP\n");
-
-			System.out.println(grilleJeu.toString());
+			
+			
+			
 			if(grilleJeu.estReussi()){
 				partieEnCours=false;
 			}
