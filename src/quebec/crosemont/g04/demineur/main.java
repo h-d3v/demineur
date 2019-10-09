@@ -1,8 +1,6 @@
-/*
- * main.java
- *
- *
- *
+/*Programme principale du jeu démineur en
+ * ligne de commande.
+ *Fait par Julien Jacquard, Riyad Trii & Hédi Ouahada
  */
 package quebec.crosemont.g04.demineur;
 import java.util.Random;
