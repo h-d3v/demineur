@@ -22,8 +22,8 @@ public class Case{
     protected Marque marque;
     protected boolean decouverte;
     //=================Constructeurs==================
-    /*Consttructeur d'un Objet Case avec un Type passe en parametre
-    * @param Type unType Enum représentant les différents types possibles de Case :
+    /*Constructeur d'un Objet Case avec un Type passe en parametre
+    * @param : Type unType Enum représentant les différents types possibles de Case :
     *0. VIDE
     *1. BOMBE
     */
@@ -33,7 +33,7 @@ public class Case{
         marque=Marque.VIDE;
     }
     /*Constructeur d'un Objet Case sana parametre
-     * la marque est vide par degaut
+     * la marque est vide par defaut
      */
     public Case(){
         type=Type.VIDE;
@@ -65,7 +65,7 @@ de cette méthode, la marque passe successivement de «vide» à
     }
 //==========================get()-set()=======================
     /*
-    *Metgode qui retourne le Type de l'objet Case
+    *Methode qui retourne le Type de l'objet Case
     * @return: Type unType
      */
 
@@ -82,7 +82,7 @@ de cette méthode, la marque passe successivement de «vide» à
     }
 
     /*
-     *Methode qui retourne le booleun decouvert de l'objet Case
+     *Methode qui retourne le booleeun decouvert de l'objet Case
      * @return: boolean decouverte
      */
     public boolean estDecouverte(){
