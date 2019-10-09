@@ -78,7 +78,7 @@ public class main{
 		int x=0,y=0;
 
 		boolean partieEnCours=true, matches=false;
-		//new Pattern chainePattern = Pattern.compile("[md](-)[0-9]*(-)[0-9]*");
+	    //création du patron de l'action a entrée
 		String pattern = "[md](-)[0-9]*(-)[0-9]*";
 
 		//Tant que la partie n'est pas finie, cette boucle se repete.
@@ -89,7 +89,7 @@ public class main{
 				while(matches==false){
 					System.out.println("Veuillez entrez la prochaine action, \n m ou d suivi du x ou y de la case (A-X-Y): ");
 					chaine=in.next();
-					//Matcher matcherChaine=chainePattern.matcher(chaine);
+					
 					matches = Pattern.matches(pattern, chaine);
 					if(matches==true){
 						chaineTable=chaine.split("-");
