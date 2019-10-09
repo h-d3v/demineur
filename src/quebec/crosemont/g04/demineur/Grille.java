@@ -126,7 +126,7 @@ protected int compterVoisins(int x, int y){
         assert  y>=0;
         assert x<largeur;
         assert y<hauteur;
-        Random gen=new Random(1);// Le seed Random est pour les tests seulement, a retirer pour la version finale
+        Random gen=new Random();
         int xx, yy;
 
         //Remplir les cases de la grille avec les objets Case
