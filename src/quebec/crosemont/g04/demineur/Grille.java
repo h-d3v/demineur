@@ -109,22 +109,10 @@ protected int compterVoisins(int x, int y){
             }
         }
 
-            /*for(int i=x-1;i<=x+1;i++){
-                for(int j=y-1; j<=y+1;j++){
-                    try{
-                        if (cases[i][j].type==Type.BOMBE) compteur++;}
-                    catch (ArrayIndexOutOfBoundsException ignored){}
-                }
-            }*/
+
         return compteur;
     }
-/*
-Constitue la grille de Cases aléatoire-
-ment, sachant que la case aux coordonnées (x,y) doit être vide.
-@param int x : la coordonee x representant la largeur
-@param int y : la coordonee y representant la largeur
-@param int nbBombes : le nombre de bombes a placer dans la grille
-*/
+
 
 
     public void  initialiser(int x, int y, int nbBombes) throws IllegalArgumentException{
