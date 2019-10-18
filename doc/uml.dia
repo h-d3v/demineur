@@ -2686,7 +2686,7 @@
         <dia:point val="88.9172,23.3674"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.0672,23.3174;102.53,26.983"/>
+        <dia:rectangle val="88.0672,23.3174;105.032,26.983"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2694,8 +2694,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="88.9172,23.3674"/>
         <dia:point val="88.9172,25.5502"/>
-        <dia:point val="102.48,25.5502"/>
-        <dia:point val="102.48,26.933"/>
+        <dia:point val="104.982,25.5502"/>
+        <dia:point val="104.982,26.933"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3367,7 +3367,7 @@
             <dia:string>#id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#int#</dia:string>
+            <dia:string>#NiveauDifficulté#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3957,17 +3957,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="102.48,30.7834"/>
+        <dia:point val="104.982,30.7834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.43,30.7334;105.433,37.1449"/>
+        <dia:rectangle val="104.932,30.7334;105.433,37.1449"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="102.48,30.7834"/>
-        <dia:point val="102.48,32.9246"/>
+        <dia:point val="104.982,30.7834"/>
+        <dia:point val="104.982,32.9246"/>
         <dia:point val="105.233,32.9246"/>
         <dia:point val="105.233,36.3449"/>
       </dia:attribute>
@@ -4388,13 +4388,13 @@
         <dia:point val="90.2949,26.9834"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.2449,26.9334;114.715,34.6334"/>
+        <dia:rectangle val="90.2449,26.9334;119.72,34.6334"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="90.2949,26.9834"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -4744,7 +4744,7 @@
                 <dia:string>#difficulté#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#int#</dia:string>
+                <dia:string>#NiveauDifficulté#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
