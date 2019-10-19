@@ -47,6 +47,12 @@
     \begin{enumerate}
       
     \item {\bf getFaceCase(int, int) }: Retourne la représentation d'une Case sur la Grille.
+      Si la case est cachée, elle est représentée par sa marque, sinon, elle est représentée par l'une des options suivantes :
+      \begin{itemize}
+      \item Son Type s'il s'agit d'une bombe
+      \item une espace si elle est vide et n'est adjacente à aucune bombe
+      \item Le nombre de bombes adjacentes (entre 1 et 8)
+      \end{itemize}
       \begin{itemize}
       \item Paramètres : 
         \begin{enumerate}
