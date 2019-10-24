@@ -1,0 +1,202 @@
+\section {Classe Joueur}
+
+Un joueur de démineur. Il est identifié de façon unique par son pseudonyme.
+
+\begin{itemize}
+
+\item Propriétés : 
+  \begin{enumerate}
+  \item nom : Le nom complet du joueur 
+    \begin{itemize}
+    \item Type : String
+    \item Accès : lecture seule
+    \end{itemize}
+  \item pseudonyme : Le pseudonyme du joueur
+    \begin{itemize}
+    \item Type : String
+    \item Accès : lecture seule
+    \end{itemize}
+  \item niveau : un niveau numérique représentant la qualité du joueur.
+    \begin{itemize}
+    \item Type : int
+    \item Accès : lecture seule
+    \end{itemize}
+  \item parties : La liste des parties jouées par le joueur
+    \begin{itemize}
+    \item Type : ArrayList<Partie>
+    \item Accès : lecture seule
+    \end{itemize}
+  \end{enumerate}
+
+\item Constructeurs : 
+
+  \begin{enumerate}
+  \item Joueur : Constructeur complet du joueur. Utile pour construire un joueur en précisant toutes ses caractéristiques.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unNom (String) : Le nom du Joueur
+      \item unPseudonyme (String) : Le pseudonyme du Joueur
+      \item unNiveau (int) : Le niveau du Joueur
+      \item desParties (ArrayList<Partie>) : La liste des parties du Joueur
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unNom ne peut pas être null ou une chaîne vide.
+      \item unPseudonyme ne peut pas être null ou une chaîne vide.
+      \item unNom ne peut pas être < 0.
+      \item desParties ne peut pas être null.
+      \end{enumerate}
+    \end{itemize}
+  \item Joueur : Constructeur avec valeurs par défaut. Utile pour un joueur qui vient de s'inscrire. Le Joueur est créé avec son nom et son pseudonyme fournis, un niveau à 0 et une liste de parties vide.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unNom (String) : Le nom du Joueur
+      \item unPseudonyme (String) : Le pseudonyme du Joueur
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unNom ne peut pas être null ou une chaîne vide.
+      \item unPseudonyme ne peut pas être null ou une chaîne vide.
+      \end{enumerate}
+    \end{itemize}
+
+  \end{enumerate}
+
+\item Méthodes : 
+
+  \begin{enumerate}
+  \item ajouterPartie : ajoute une partie à la liste des parties 
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unePartie (Partie) : La partie à ajouter
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item La partie n'est pas nulle
+      \end{enumerate}
+    \end{itemize}
+  \end{enumerate}
+  \end{itemize}
+
+\section {Classe JoueurDAO}
+
+La classe d'accès aux données du Joueur.
+
+\begin{itemize}
+\item Hérite de : DAO<Joueur>
+
+\item Méthodes : 
+
+  \begin{enumerate}
+  \item lire : instancie un Joueur à partir des informations provenant de la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item identifiant (Object) : Le pseudonyme du Joueur
+      \end{enumerate}
+    \item Retour : Le Joueur provenant de la source de données ou null s'il n'a pas été trouvé.
+      \begin{itemize}
+      \item Type de retour: Joueur
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item identifiant est une chaîne de caractère non nulle et non vide.
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la lecture.
+      \end{enumerate}
+    \end{itemize}
+
+  \item créer : ajoute un nouveau Joueur dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unJoueur (Joueur) : Le Joueur à ajouter
+      \end{enumerate}
+    \item Retour : Le Joueur ajouté à la source de données tel qu'il peut avoir été modifié lors de l'ajout.
+      \begin{itemize}
+      \item Type de retour: Joueur
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unJoueur est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la création.
+      \end{enumerate}
+    \end{itemize}
+
+  \item modifier : modifie un Joueur dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unJoueur (Joueur) : Le Joueur tel qu'il doit devenir dans la source de données.
+      \end{enumerate}
+    \item Retour : Le Joueur après modification dans la source de données.
+      \begin{itemize}
+      \item Type de retour: Joueur
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unJoueur est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la modification.
+      \end{enumerate}
+    \end{itemize}
+    
+  \item supprimer : supprime un Joueur de la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unJoueur (Joueur) : Le Joueur à supprimer
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unJoueur est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la modification.
+      \end{enumerate}
+    \end{itemize}
+
+  \item trouverTout : Recherche tous les joueurs à partir de la source de données
+    \begin{itemize}
+    \item Retour : Une liste de Joueurs représentant tous les joueurs trouvés dans la source de données
+      \begin{itemize}
+      \item Type de retour: ArrayList<Joueur>
+      \end{itemize}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la modification.
+      \end{enumerate}
+    \end{itemize}
+    
+  \item trouverParNiveau : Recherche tous les joueurs d'un certain niveau dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item niveau (int) : Le niveau des joueurs recherchés
+      \end{enumerate}
+    \item Retour : Une liste de Joueurs représentant tous les joueurs trouvés dans la source de données
+      \begin{itemize}
+      \item Type de retour: ArrayList<Joueur>
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item niveau est >= 0.
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la modification.
+      \end{enumerate}
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
