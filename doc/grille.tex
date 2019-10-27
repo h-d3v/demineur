@@ -1,0 +1,203 @@
+  \section {Classe Grille}
+
+  Une grille de Démineur. La grille rectangulaire de longueur et largeur entre 5 et {\tt Integer.MAX_VALUE} inclusivement est constituée de Cases initialement toutes cachées. Lorsque le joueur découvre une Case, toutes ses voisines «vides» sont aussi découvertes. Découvrir une Case sans bombes adjacentes découvre automatiquement toutes les voisines.
+
+  \begin{itemize}
+  \item Propriétés : 
+    \begin{enumerate}
+    \item {\bf largeur} : Le nombre de Cases horizontalement sur la grille.
+          \begin{itemize}
+          \item Type : int
+          \item Accès : lecture seule
+          \end{itemize}
+    \item {\bf hauteur} : Le nombre de Cases verticalement sur la grille.
+          \begin{itemize}
+          \item Type : int
+          \item Accès : lecture seule
+          \end{itemize}
+
+    \end{enumerate}
+
+  \item Constructeurs : 
+
+  \begin{enumerate}
+  \item {\bf Grille(int, int) }: Constructeur paramètré. Initialise une Grille de dimensions données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item uneLargeur (int) : La largeur de la nouvelle grille
+      \item uneHauteur (int) : La hauteur de la nouvelle grille
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item La largeur et la hauteur doivent être comprises entre 5 et {\tt Integer.MAX_VALUE} inclusivement.
+        \begin{itemize}
+          \item Exception : IllegalArgumentException
+          \item Message : La grille doit avoir une largeur et une hauteurs comprises entre 5 et {\tt Integer.MAX_VALUE} inclusivement.
+        \end{itemize}
+      \end{enumerate}
+      
+    \item {\bf Grille() }: Constructeur sans paramètres. Initialise une Grille de 10x10.
+    \end{itemize}
+    
+  \end{enumerate}
+
+  \item Méthodes : 
+
+    \begin{enumerate}
+      
+    \item {\bf getFaceCase(int, int) }: Retourne la représentation d'une Case sur la Grille.
+      Si la case est cachée, elle est représentée par sa marque, sinon, elle est représentée par l'une des options suivantes :
+      \begin{itemize}
+      \item Son Type s'il s'agit d'une bombe
+      \item une espace si elle est vide et n'est adjacente à aucune bombe
+      \item Le nombre de bombes adjacentes (entre 1 et 8)
+      \end{itemize}
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case voulue
+        \item y (int) : La coordonnée verticale de la case voulue          
+        \end{enumerate}
+      \item Retour : La représentation de la case aux coordonnées (x,y)
+          \begin{itemize}
+          \item Type de retour: String
+          \end{itemize}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf compterVoisins(int, int) }: Retourne le nombre de voisins d'une case sur lesquels se trouvent une bombe
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case voulue
+        \item y (int) : La coordonnée verticale de la case voulue          
+        \end{enumerate}
+      \item Retour : Le nombre de cases voisine de type «bombe»
+          \begin{itemize}
+          \item Type de retour: int
+          \end{itemize}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf toString() }: Retourne une représentation en chaîne de caractères de la grille. Les bords de la grilles sont dessinées en caractères unicode «BOX DRAWING» et pour chaque case, sa représentation actuelle est données, selon qu'elle soit cachée ou marquée.
+      \begin{itemize}
+      \item Retour : représentation en chaîne de caractères de la Grille.
+          \begin{itemize}
+          \item Type de retour: String
+          \end{itemize}
+      \end{itemize}
+      
+    \item {\bf initialiser(int, int, int) }: Constitue la grille de Cases aléatoirement, sachant que la case aux coordonnées (x,y) doit être vide.
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case vide
+        \item y (int) : La coordonnée verticale de la case vide
+        \item nbBombes (int) : Le nombre total de bombes à placer sur la Grille.
+        \end{enumerate}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case «vide» existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \item Le nombre de bombes doit être plus petit que \break$largeur\times hauteur$
+          \begin{itemize}
+          \item Exception : IllegalArgumentException 
+          \item Message : nbBombes doit être plus petit que le nombre de cases.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf getCase(int, int) }: Retourne la case aux coordonnées (x,y)
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case voulue
+        \item y (int) : La coordonnée verticale de la case voulue          
+        \end{enumerate}
+      \item Retour : La case aux coordonnées (x,y)
+          \begin{itemize}
+          \item Type de retour: Case
+          \end{itemize}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf découvrir(int, int) }: découvre la case aux coordonnées données.
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case voulue
+        \item y (int) : La coordonnée verticale de la case voulue          
+        \end{enumerate}
+      \item Retour : Le Type de la case découverte.
+          \begin{itemize}
+          \item Type de retour: Type
+          \end{itemize}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf marquer(int, int) }: marque la case aux coordonnées données.
+      \begin{itemize}
+      \item Paramètres : 
+        \begin{enumerate}
+        \item x (int) : La coordonnée horizontale de la case voulue
+        \item y (int) : La coordonnée verticale de la case voulue          
+        \end{enumerate}
+      \item Retour : La nouvelle marque de la case.
+          \begin{itemize}
+          \item Type de retour: Marque
+          \end{itemize}
+      \item Assertions : 
+        \begin{enumerate}
+        \item La case existe
+          \begin{itemize}
+            \item Exception : IllegalArgumentException
+          \item Message : Les coordonnées spécifiées sont hors de la grille.
+          \end{itemize}
+        \end{enumerate}
+      \end{itemize}
+      
+    \item {\bf toutRévéler() }: découvre toutes les cases.
+      
+    \item {\bf estRéussi() }: vérifie que le jeu est réussi ou non.
+      \begin{itemize}
+      \item Retour : Vrai si et seulement si toutes les cases et uniquement les cases de type «vide» sont découvertes.
+          \begin{itemize}
+          \item Type de retour: boolean
+          \end{itemize}
+      \end{itemize}
+      
+    \end{enumerate}
+
+  \end{itemize}
