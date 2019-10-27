@@ -185,7 +185,7 @@ protected int compterVoisins(int x, int y){
                     if (cases[i][j].type == Type.VIDE && !cases[i][j].decouverte&& compterVoisins(i, j)==0) {
                         decouvrir(i, j);
                     }
-                    else if (cases[i][j].type == Type.VIDE && !cases[i][j].decouverte&& compterVoisins(i, j)>=0){
+                    else if (cases[i][j].type == Type.VIDE && !cases[i][j].decouverte&& compterVoisins(i, j)>0){
                         cases[i][j].decouvrir();
                     }
                 }

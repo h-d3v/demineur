@@ -3,6 +3,9 @@
  *Fait par Julien Jacquard, Riyad Trii & Hédi Ouahada
  */
 package quebec.crosemont.g04.demineur;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.*;
 import java.io.*;
@@ -14,8 +17,11 @@ public class main{
 	public static void main (String[] args) {
 		Scanner in = new Scanner(System.in);
 		int largeur=0,hauteur=0;
+
+
 		//tant qu'un numero valide n'est pas entre, le programme n'avance pas, la grille doit etre conforme aux dimensions
 		//Entre 5*5 et integer_maxValue** cases
+
 		do{
 			System.out.println("Veuillez entrez la largeur  de grille choisie: ");
 			while (!in.hasNextInt()) {
@@ -145,8 +151,6 @@ public class main{
 
 	}
 }
-
-
 
 
 

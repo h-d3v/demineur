@@ -1,1 +1,0 @@
-doc/énoncé.md
