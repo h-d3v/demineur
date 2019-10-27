@@ -18,7 +18,7 @@ package quebec.crosemont.g04.demineur;
 
 import java.util.Random;
 
-class Grille{
+public class Grille{
 
     //=======================Proprietes================================
     protected int largeur, hauteur;

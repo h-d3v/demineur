@@ -17,7 +17,7 @@
 
 package quebec.crosemont.g04.demineur;
 
-enum Marque{
+public enum Marque{
     VIDE,
     BOMBE,
     INCONNU;

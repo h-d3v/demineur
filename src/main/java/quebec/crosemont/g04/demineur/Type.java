@@ -15,7 +15,7 @@
 
 package quebec.crosemont.g04.demineur;
 
-enum Type {
+public enum Type {
     VIDE,
     BOMBE;
     /* toString pour enum Type,
