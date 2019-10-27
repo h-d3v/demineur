@@ -18,13 +18,29 @@ Pour aider votre recherche, vous pouvez marquer d'un drapeau une case que vous s
 
 ## Mécanique de jeu
 
-Le jeu demande d'abord au joueur la taille de la grille désirée, sous forme d'une paire d'entiers : Largeur et Hauteur. La grille doit comporter un minimum de 5 et un maximum de 2 147 483 647 cases dans chaque dimension. Sous les cases, ⌈(Largeur × Hauteur ÷ 10)⌉ bombes sont dispersées au hasard.
+Le jeu demande d'abord au joueur d'entrer son pseudonyme puis, s'il n'existe pas déjà dans la base de données, son nom complet. 
+
+Le jeu affiche alors une liste des 10 meilleurs joueurs plus le joueur qui vient de s'inscrire s'il ne fait pas partie de cette liste avec leurs niveau et nom complet. Par exemple, en supposant que Krusty vient d'entrer son pseudonyme :
+
+1 : BobG (2127) Bob Gratton
+2 : Rog21 (1988) Roger Tremblay
+...
+10 : Zoum (884) Eldéore Thibeault
+53 : Krusty99 (81) Krusty Leclown
+
+Ensuite, on lui demande de choisir un niveau de difficulté entre facile, moyen et difficile. Le niveau détermine la taille de la grille et le nombre de bombes dissimulées dans la grille de cette façon : 
+
+ * Facile : 9x9, 10 mines
+ * Moyen : 16x16, 40 mines
+ * Difficile : 24x24, 99 mines
+
+Avant que la partie ne commence, les 10 meilleurs pointages réalisés pour ce niveau de difficulté sont affichés avec le pseudonyme du joueur et son temps réalisé.
 
 Avant chaque coup, la grille est affichée. Les cases découvertes montrent le nombre de bombes adjacentes, ou rien du tout si la case n'est adjacente à aucune bombe. Les cases non encore découvertes montrent une case vide ou une marque, le cas échéant.
 
 Le joueur est invité à entrer son prochain coup sous la forme A X Y où :
 
- * A représente une action parmis : (D)écouvrir, (M)arquer d'un drapeau ou ? pour marquer d'un point d'interrogation
+ * A représente une action parmi : (D)écouvrir, (M)arquer d'un drapeau ou ? pour marquer d'un point d'interrogation
  * X la coordonées horizontale de la case cible
  * Y la coordonées verticale de la case cible
 
@@ -33,6 +49,8 @@ Le tout premier coup, *ne peut pas découvrir une bombe*
 Lorsqu'une case est découverte, si elle ne cachait pas de bombe et n'était elle-même adjacente à aucune bombe, tous ses voisins sont automatiquement découverts (et ceci afin d'accélérer le jeu puisqu'on sait maintenant qu'ils ne cachent pas de bombe). Le même traitement est appliqué à ces voisins nouvellement découverts.
 
 Lorsque toutes les cases ne cachant pas de bombe sont découvertes, le jeu se termine par un «BRAVO!!». Si une bombe est découverte, le jeu se termine par un «BOUM!!!». Dans tous les cas, la grille entièrement découverte est affichée une dernière fois.
+
+La partie est alors enregistrée avec la date de début et de fin.
 
 ## Exemple de déroulement 
 

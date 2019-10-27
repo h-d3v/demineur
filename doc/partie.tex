@@ -1,0 +1,198 @@
+\section{Classe Partie}
+
+Le résultat d'une partie de démineur.
+
+Le niveau de difficulté d'une partie est déterminé selon la taille de la grille et le nombre de mines comme suit :
+
+\begin{enumerate}
+\item Facile : 9x9, 10 mines
+\item Moyen : 16x16, 40 mines
+\item Difficile : 24x24, 99 mines
+\end{enumerate}
+
+\begin{itemize}
+\item Propriétés : 
+  \begin{enumerate}
+  \item id : L'identifiant unique de la partie
+    \begin{itemize}
+    \item Type : int
+    \item Accès : lecture seule
+    \end{itemize}
+  \item temps : Temps écoulé en secondes depuis le début de la partie ou jusqu'à ce qu'elle soit terminée.
+    \begin{itemize}
+    \item Type : 
+    \item Accès : lecture seule
+    \end{itemize}
+  \item date : Date de début de la partie
+    \begin{itemize}
+    \item Type : LocalDateTime
+    \item Accès : lecture seule
+    \end{itemize}
+  \item niveauDifficulté : Niveau de difficulté de la partie.
+    \begin{itemize}
+    \item Type : NiveauDifficulté
+    \item Accès : lecture seule
+    \end{itemize}
+
+  \end{enumerate}
+
+\item Constructeurs : 
+
+  \begin{enumerate}
+  \item Partie : Constructeur complet. Utile pour construire une partie en précisant toutes ses caractéristiques.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unID (int) : identifiant unique de la partie.
+      \item uneDateDébut (LocalDateTime) : La date et l'heure de début de la partie
+      \item uneDateFin (LocalDateTime) : La date et l'heure de fin de la partie, null si le partie est en cours.
+      \item niveauDifficulté (Niveaudifficulté) : Le niveau de difficulté de la partie.
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item uneDateFin est null ou après uneDateDébut.
+      \end{enumerate}
+    \end{itemize}
+  \item Partie : Constructeur avec valeurs par défaut. Utile pour créer une toute nouvelle partie. La partie est créée avec la date et l'heure courante et un id=-1.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item niveauDifficulté (Niveaudifficulté) : Le niveau de difficulté de la partie.
+      \end{enumerate}
+    \end{itemize}
+
+  \end{enumerate}
+
+\end{itemize}
+
+\section{Classe PartieDAO}
+
+La classe d'accès aux données de la Partie
+
+\begin{itemize}
+\item Méthodes : 
+
+  \begin{enumerate}
+  \item lire : instancie une Partie à partir des informations provenant de la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item identifiant (Object) : L'ID de la Partie
+      \end{enumerate}
+    \item Retour : Le Partie provenant de la source de données ou null s'il n'a pas été trouvé.
+      \begin{itemize}
+      \item Type de retour: Partie
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item identifiant est un Integer.
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la lecture.
+      \end{enumerate}
+    \end{itemize}
+
+  \item créer : ajoute un nouvelle Partie dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unePartie (Partie) : Le Partie à ajouter
+      \end{enumerate}
+    \item Retour : Le Partie ajoutée à la source de données telle qu'elle peut avoir été modifiée lors de l'ajout.
+      \begin{itemize}
+      \item Type de retour: Partie
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unePartie est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la création.
+      \end{enumerate}
+    \end{itemize}
+
+  \item modifier : modifie une partie dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unePartie (Partie) : Le Partie telle qu'elle doit devenir dans la source de données.
+      \end{enumerate}
+    \item Retour : Le Partie après modification dans la source de données.
+      \begin{itemize}
+      \item Type de retour: Partie
+      \end{itemize}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unePartie est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la modification.
+      \end{enumerate}
+    \end{itemize}
+    
+  \item supprimer : supprime une partie de la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item unePartie (Partie) : La Partie à supprimer
+      \end{enumerate}
+    \item Assertions : 
+      \begin{enumerate}
+      \item unePartie est non null
+      \end{enumerate}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la suppression.
+      \end{enumerate}
+    \end{itemize}
+
+  \item trouverTout : Recherche toutes les parties à partir de la source de données
+    \begin{itemize}
+    \item Retour : Une liste de Parties représentant toutes les parties trouvées dans la source de données
+      \begin{itemize}
+      \item Type de retour: ArrayList<Partie>
+      \end{itemize}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la recherche.
+      \end{enumerate}
+    \end{itemize}
+
+  \item trouverParDifficulté : Recherche toutes les parties d'un certain niveau de difficulté dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item difficulté (Niveau) : Le niveau de difficulté des parties recherchées
+      \end{enumerate}
+    \item Retour : Une liste de Parties représentant toutes les parties trouvés dans la source de données
+      \begin{itemize}
+      \item Type de retour: ArrayList<Partie>
+      \end{itemize}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la recherche.
+      \end{enumerate}
+    \end{itemize}
+
+  \item trouverParDate : Recherche toutes les parties ayant débuté à une certaine date dans la source de données.
+    \begin{itemize}
+    \item Paramètres : 
+      \begin{enumerate}
+      \item date (Date) : La date de début des parties recherchées
+      \end{enumerate}
+    \item Retour : Une liste de Parties représentant toutes les parties trouvées dans la source de données
+      \begin{itemize}
+      \item Type de retour: ArrayList<Partie>
+      \end{itemize}
+    \item Lance :
+      \begin{enumerate}
+      \item DAOException : si un problème survient lors de la recherche.
+      \end{enumerate}
+    \end{itemize}
+    
+  \end{enumerate}
+
+\end{itemize}
