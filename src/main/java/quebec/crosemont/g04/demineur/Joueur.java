@@ -1,5 +1,5 @@
 //Classe Joueur
-//package quebec.crosemont.g04.demineur
+package quebec.crosemont.g04.demineur;
 import java.util.*; 
 public class Joueur{
     // //=======================Proprietes================================

@@ -268,37 +268,38 @@ public boolean estReussi(){
 //methode toString de la grille
 
     public String toString(){
-	String res="   ";
-	for(int i=0;i<largeur;i++){
-	    res+=i+(i<10?"  ":" ");
-	}
-	res+="\n  ╔";
-	for(int i=0;i<largeur-1;i++){
-	    res+="══╦";
-	}
-	res+="══╗\n 0";
-	for(int j=0;j<hauteur;j++){
-	    for(int i=0;i<largeur;i++){
-		res+="║" + getFaceCase(i,j);
-	    }
-	    res+="║";
-	    if(j==hauteur-1) break;
+        String res="   ";
+        for(int i=0;i<largeur;i++){
+            res+=i+(i<10?"  ":" ");
+        }
+        res+="\n  ╔";
+        for(int i=0;i<largeur-1;i++){
+            res+="══╦";
+        }
+        res+="══╗\n 0";
+        for(int j=0;j<hauteur;j++){
+            for(int i=0;i<largeur;i++){
+                res+="║" + getFaceCase(i,j);
+            }
+            res+="║";
+            if(j==hauteur-1) break;
 
-	    res+="\n  ╠";
+            res+="\n  ╠";
 
-	    for(int i=0;i<largeur-1;i++){
-		res+="══╬";
-	    }
-	    res+="══╣\n" +(j<9?" "+(j+1):(j+1));
+            for(int i=0;i<largeur-1;i++){
+                res+="══╬";
+            }
+            res+="══╣\n" +(j<9?" "+(j+1):(j+1));
 
-	}
-	res+="\n  ╚";
-	for(int i=0;i<largeur-1;i++){
-	    res+="══╩";
-	}
-	res+="══╝";
+        }
+        res+="\n  ╚";
+        for(int i=0;i<largeur-1;i++){
+            res+="══╩";
+        }
+        res+="══╝";
 
-	return res;
+        return res;
     }
+
 }
 
