@@ -2,9 +2,10 @@ package quebec.crosemont.g04.demineur;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Partie {
-    private static int compteurId= Integer.MAX_VALUE;
+    private static final AtomicInteger compteurId=  new AtomicInteger(Integer.MAX_VALUE);
     private int id;
     private LocalDateTime dateDebut;
     private LocalDateTime dateFin=null;
@@ -17,8 +18,7 @@ public class Partie {
         niveauDifficulte=unNiveauDifficulte;
     }
     public Partie(NiveauDifficulte unNiveauDifficulte){
-        id=compteurId;
-        compteurId--;
+        id=compteurId.getAndDecrement();
         niveauDifficulte=unNiveauDifficulte;
         dateDebut= LocalDateTime.now();
     }
@@ -43,6 +43,9 @@ public class Partie {
         Duration duree = Duration.between(dateDebut, dateFin);
         long tempsLong= duree.toSeconds();
         return (int) tempsLong;
+    }
+    public void terminer(){
+        dateFin=LocalDateTime.now();
     }
 
 

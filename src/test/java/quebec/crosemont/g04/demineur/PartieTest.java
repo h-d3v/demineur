@@ -6,20 +6,18 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class PartieTest {
-
+    Partie partieConstructeurPartiel0 = new Partie(NiveauDifficulte.FACILE);
+    Partie partieConstructeurPartiel1 = new Partie(NiveauDifficulte.FACILE);
     Partie partieConstructeurPartiel = new Partie(NiveauDifficulte.FACILE);
     Partie partieConstructeurTotal = new Partie(11, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11,2),NiveauDifficulte.FACILE);//objet test
 
-    @Test
-    public void testIdPartieConstructeurPartiel() {
-        assertEquals(Integer.MAX_VALUE, partieConstructeurPartiel.getId());
-        Partie partieConstructeurPartiel2 = new Partie(NiveauDifficulte.FACILE);
-        assertEquals(Integer.MAX_VALUE-1, partieConstructeurPartiel2.getId());
-    }
+
     @Test
     public void testIdPartieConstructeurTotal(){
         assertEquals(11, partieConstructeurTotal.getId());
     }
+
+
     @Test
     public void testIdPartieConstructeurTotalFalse(){
         assertNotEquals(21, partieConstructeurTotal.getId());
@@ -72,6 +70,11 @@ public class PartieTest {
         partieConstructeurTotal.setTemps(1);
         assertEquals(1, partieConstructeurTotal.getTemps() );
         assertTrue(LocalDateTime.of(2019,11,23,21,00,12,2).equals(partieConstructeurTotal.getDateFin()));
+    }
+    @Test
+    public void testIdPartieConstructeurPartiel() {
+        assertEquals(Integer.MAX_VALUE, partieConstructeurPartiel0.getId());
+        assertEquals(Integer.MAX_VALUE-1, partieConstructeurPartiel1.getId());
     }
 
 
