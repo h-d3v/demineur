@@ -28,6 +28,11 @@ Le niveau de difficulté d'une partie est déterminé selon la taille de la gril
     \item Type : LocalDateTime
     \item Accès : lecture seule
     \end{itemize}
+  \item date : Date de fin de la partie
+    \begin{itemize}
+    \item Type : LocalDateTime
+    \item Accès : complet
+    \end{itemize}
   \item niveauDifficulté : Niveau de difficulté de la partie.
     \begin{itemize}
     \item Type : NiveauDifficulté
@@ -63,6 +68,19 @@ Le niveau de difficulté d'une partie est déterminé selon la taille de la gril
 
   \end{enumerate}
 
+\item Méthodes : 
+
+  \begin{enumerate}
+  \item terminer : Termine une partie en cours en stoquant la date de fin (ne fait rien si la partie est déjà terminée).
+  \item getTemps : Retourne le nombre de seconde qu'a duré la partie (entre la date de début et la date de fin)
+    \begin{itemize}
+    \item Retour : le nombre de seconde qu'a duré la partie. Si la partie est encore en cours, retourne le nombre de secondes écoulées depuis le début.
+      \begin{itemize}
+      \item Type de retour: int
+      \end{itemize}
+    \end{itemize}
+  \end{enumerate}
+  
 \end{itemize}
 
 \section{Classe PartieDAO}
