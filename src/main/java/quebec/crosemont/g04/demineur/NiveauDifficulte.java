@@ -10,7 +10,7 @@ package quebec.crosemont.g04.demineur;
 enum NiveauDifficulte{
     FACILE,
     MOYEN,
-    DIFFICILE;
+    DIFFICILE
 }
 
 
