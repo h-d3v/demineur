@@ -14,14 +14,14 @@ Le jeu doit se rapprocher le plus possible de la version classique pour Windows 
 
 C'est le code disponible sur votre divergence sur le gitlab du département au moment de la remise qui sera évaluée.
 
-Date de remise : 1er octobre 23h59
+Date de remise : 5 novembre 08h00
 
 
 ## Gestion du projet :
 
 Le projet se fait en équipes de deux ou trois personnes.
 
-L'un des coéquipier devra être responsable de créer la divergence et de fusionner les branches de ses coéquipiers et les changements au _master_ du projet original. *N'oubliez pas de rendre votre projet privé sur gitlab*
+L'un des coéquipiers devra être responsable de créer la divergence et de fusionner les branches de ses coéquipiers et les changements au _master_ du projet original. *N'oubliez pas de rendre votre projet privé sur gitlab*
 
 Pour ce faire, il devra :
 
