@@ -13,7 +13,7 @@ public class JoueurDao extends Dao<Joueur>{
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
-            PreparedStatement stmt = cnx.prepareStatement("SELECT pseudo,nom,niveau FROM Joueur");
+            PreparedStatement stmt = cnx.prepareStatement("SELECT pseudo,nom,niveau FROM Joueur ORDER BY niveau DESC");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()){
@@ -90,7 +90,6 @@ public class JoueurDao extends Dao<Joueur>{
     public static void supprimer(Joueur unJoueur)throws DAOException{
         Connection cnx;
         try{
-
             cnx=SQLConnectionFactory.getConnection();
             String requete = ("DELETE FROM joueur WHERE pseudo=?");
             PreparedStatement stmt = cnx.prepareStatement(requete);
