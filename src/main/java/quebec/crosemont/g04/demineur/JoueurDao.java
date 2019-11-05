@@ -9,7 +9,7 @@ public class JoueurDao extends Dao<Joueur>{
         Joueur joueur=null;
         try {
             Connection cnx=SQLConnectionFactory.getConnection();
-            String requete = ("SELECT id FROM joueur WHERE pseudo = ?");
+            String requete = ("SELECT pseudo FROM joueur WHERE pseudo = ?");
             PreparedStatement stmt = cnx.prepareStatement(requete);
             stmt.setString(1, unPseudonyme);
             ResultSet resultat= stmt.executeQuery();
@@ -117,11 +117,70 @@ public class JoueurDao extends Dao<Joueur>{
             throw new DAOException(e);
         }
         return joueurs;
+
     }
-    private static Joueur importerJoueur (ResultSet rs) throws DAOException {
-        ArrayList<Partie> desParties=PartieDao.trouverTout();//TODO
+    public static ArrayList<Partie> trouverPartiesParJoueur(Joueur unJoueur) throws DAOException {
+        ArrayList<Partie> parties = new ArrayList<Partie>();
+        Connection cnx;
+        String pseudo = unJoueur.getPseudo();
+        try {
+
+            cnx = SQLConnectionFactory.getConnection();
+            PreparedStatement stmt = cnx.prepareStatement("SELECT ids FROM PartieListe WHERE pseudo =?");
+            stmt.setString(1, pseudo);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String[] tab=rs.getString("ids").split("-");
+                for(String uneId :tab){
+                    parties.add(PartieDao.lire(Integer.valueOf(uneId)));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+
+        return parties;
+    }
+
+    public static ArrayList<Partie> ajouterPartieAJoueur(Joueur unJoueur, Partie unePartie) throws DAOException{
+        ArrayList<Partie> desParties=trouverPartiesParJoueur(unJoueur);
+        Connection cnx;
+        String pseudo = unJoueur.getPseudo();
+        try {
+            cnx = SQLConnectionFactory.getConnection();
+            PreparedStatement stmt = cnx.prepareStatement("SELECT ids FROM PartieListe WHERE pseudo =?");
+            stmt.setString(1, pseudo);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String ids=rs.getString("ids")+"-"+unePartie.getId();
+                stmt=cnx.prepareStatement("UPDATE PartieListe Set ids=? WHERE pseudo=?");
+                stmt.setString(1, ids);
+                stmt.setString(2, pseudo);
+                stmt.execute();
+            }else{
+                String ids =String.valueOf(unePartie.getId());
+                stmt=cnx.prepareStatement("UPDATE PartieListe Set ids=? WHERE pseudo=?");
+                stmt.setString(1, ids);
+                stmt.setString(2, pseudo);
+                stmt.execute();
+
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+
+
+        return desParties;
+    }
+
+
+        private static Joueur importerJoueur (ResultSet rs) throws DAOException {
+        ArrayList<Partie> desParties=new ArrayList<Partie>();
         try{
-            JoueurDao.lire();
+            Joueur unJoueur =JoueurDao.lire();
+            desParties=trouverPartiesParJoueur(unJoueur);
             return new Joueur(rs.getString("pseudo"), rs.getString("nom"), rs.getInt("niveau"), desParties);
         } catch (SQLException e) {
             throw new DAOException(e);

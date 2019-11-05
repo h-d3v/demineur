@@ -17,11 +17,9 @@ CREATE TABLE Partie(
     CONSTRAINT chk_niveau CHECK ( niveauDifficulte<=2 )
 
 );
-CREATE TABLE PartieJoueur(
-    id INT UNSIGNED,
+CREATE TABLE PartieListe(
+    ids TEXT,
     pseudo VARCHAR(255),
-    CONSTRAINT id_fk FOREIGN KEY (id) REFERENCES Partie(id),
-    CONSTRAINT pseudo_fk FOREIGN KEY (pseudo) REFERENCES Joueur(pseudo),
-    CONSTRAINT partieJoueur_und UNIQUE (id, pseudo)
+    CONSTRAINT id_fk FOREIGN KEY (pseudo) REFERENCES Joueur(pseudo)
 );
 
