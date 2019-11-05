@@ -8,7 +8,7 @@ public class Joueur{
     protected ArrayList<Partie> parties;
     // //=================Constructeurs====================================
     //Constructeur complet
-    public Joueur(String unNom, String unPseudo, int unNiveau, ArrayList<Partie> desParties) throws IllegalArgumentException{
+    public  Joueur(String unNom, String unPseudo, int unNiveau, ArrayList<Partie> desParties) throws IllegalArgumentException{
         if (unNom.equals("")||unNom==null) throw new IllegalArgumentException("Le nom ne peut pas etre null ou vide");
 
         if (unPseudo.equals("")||unPseudo==null){

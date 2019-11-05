@@ -26,6 +26,5 @@ Insert into Partie values(8, 1606183511, 1606183811,2);
 Insert into Partie values(1, 1606189511, 1606283811,2);
 INSERT into Joueur values("bob","Robert",3);
 INSERT into Joueur values("blob","Roberto",3);
-delete * from Pa
 INSERT INTO PartieListe values("1-8","bob");
 
