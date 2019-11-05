@@ -20,8 +20,8 @@ public class SQLConnectionFactory {
   public static Connection getConnection() throws SQLException{
     String jdbc="jdbc:sqlite:";
     URL url =ClassLoader.getSystemClassLoader().getResource("demineur.db");
-    System.out.println(jdbc+url);
-    System.out.println(jdbc+url.toString().replace("file:",""));
+    //System.out.println(jdbc+url);
+    //System.out.println(jdbc+url.toString().replace("file:",""));
     //if(cnx==null || cnx.isClosed()) cnx=DriverManager.getConnection("jdbc:sqlite:/home/ju/Dropbox/Ecole/Session en cours/Applications natives/demineur (autre copie)/src/main/resources/demineur.db");
     if(cnx==null || cnx.isClosed()) cnx=DriverManager.getConnection(jdbc+url);
     return cnx;
