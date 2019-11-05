@@ -29,7 +29,7 @@ public class PartieDao extends Dao<Partie> {
         return partie;
     }
 
-    public static void ajouter(Partie unePartie) throws DAOException {
+    public static Partie ajouter(Partie unePartie) throws DAOException {
         Partie partie=null;
         Connection cnx;
         try{
@@ -43,11 +43,13 @@ public class PartieDao extends Dao<Partie> {
             stmt.setInt(1,diff);
             stmt.setTimestamp(2, dateDebut);
             stmt.setTimestamp(3, dateFin);
-            stmt.setInt(4, 22);
+            stmt.setInt(4, id);
 
-
+            stmt.execute();
 
             cnx.close();
+            partie=lire(unePartie.getId());
+            return partie;
 
 
         } catch(SQLException ex){
@@ -56,7 +58,7 @@ public class PartieDao extends Dao<Partie> {
 
     }
 
-    public static void modifier(Partie unePartie) throws DAOException {
+    public static Partie modifier(Partie unePartie) throws DAOException {
         Connection cnx;
         Partie partie=null;
         try{
@@ -77,6 +79,7 @@ public class PartieDao extends Dao<Partie> {
 
 
             cnx.close();
+            return lire(id);
 
         } catch(SQLException  ex){
             throw new DAOException(ex);
@@ -101,7 +104,7 @@ public class PartieDao extends Dao<Partie> {
         }
     }
     public static ArrayList<Partie> trouverTout()throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -123,7 +126,7 @@ public class PartieDao extends Dao<Partie> {
         return parties;
     }
     public static ArrayList<Partie> trouverPartieParDifficulte(NiveauDifficulte unNiveau) throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -146,7 +149,7 @@ public class PartieDao extends Dao<Partie> {
         return parties;
     }
     public static   ArrayList<Partie> trouverPartieParDate(LocalDateTime uneDate) throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
