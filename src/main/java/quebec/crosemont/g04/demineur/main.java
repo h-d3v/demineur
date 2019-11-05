@@ -6,6 +6,7 @@ package quebec.crosemont.g04.demineur;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.*;
 import java.io.*;
@@ -20,7 +21,12 @@ public class main{
 		Scanner in = new Scanner(System.in);
 
 		int largeur=0,hauteur=0;
-
+		Partie partie= new Partie(11, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11,2),NiveauDifficulte.DIFFICILE);
+		try {
+			PartieDao.lire(1);
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
 
 		//tant qu'un numero valide n'est pas entre, le programme n'avance pas, la grille doit etre conforme aux dimensions
 		//Entre 5*5 et integer_maxValue** cases

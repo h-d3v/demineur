@@ -2,24 +2,23 @@ package quebec.crosemont.g04.demineur;
 
 import java.sql.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class PartieDao implements Dao<Partie>{
+public class PartieDao extends Dao<Partie> {
 
-    public Partie lire(Object id) throws DAOException {
+    public static Partie lire(Object id) throws DAOException {
         Partie partie=null;
         Connection cnx;
+        int idint= (int) id;
         try{
             cnx=SQLConnectionFactory.getConnection();
 
             PreparedStatement stmt = cnx.prepareStatement("SELECT id,niveauDifficulte, dateDebut, dateFin FROM Partie WHERE id = ?");
-            stmt.setObject(1, id);
+            stmt.setInt(1, idint);
 
             ResultSet rs = stmt.executeQuery();
-
-            if(rs.next()) partie= importerPartie(rs);
+            partie=importerPartie(rs);
 
             cnx.close();
 
@@ -30,62 +29,67 @@ public class PartieDao implements Dao<Partie>{
         return partie;
     }
 
-    public Partie ajouter(Partie unePartie) throws DAOException {
+    public static void ajouter(Partie unePartie) throws DAOException {
         Partie partie=null;
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
 
-            PreparedStatement stmt = cnx.prepareStatement("INSERT INTO Partie (niveauDifficulte, dateDebut, dateFin) VALUES (?,?,?)");
-            stmt.setInt(1, unePartie.getNiveauDifficulte().ordinal());
-            stmt.setTimestamp(2, Timestamp.valueOf(unePartie.getDateDebut()));
-            stmt.setTimestamp(3, Timestamp.valueOf(unePartie.getDateFin()));
+            PreparedStatement stmt = cnx.prepareStatement("INSERT INTO Partie (niveauDifficulte, dateDebut, dateFin, id) VALUES (?,?,?,?)");
+            int diff = unePartie.getNiveauDifficulte().ordinal();
+            Timestamp dateDebut = Timestamp.valueOf(unePartie.getDateDebut());
+            Timestamp dateFin = Timestamp.valueOf(unePartie.getDateFin());
+            int id =unePartie.getId();
+            stmt.setInt(1,diff);
+            stmt.setTimestamp(2, dateDebut);
+            stmt.setTimestamp(3, dateFin);
+            stmt.setInt(4, 22);
 
 
-            ResultSet rs = stmt.executeQuery();
-
-            if(rs.next()) partie= importerPartie(rs);
 
             cnx.close();
+
 
         } catch(SQLException ex){
             throw new DAOException(ex);
         }
-        return lire(partie);
+
     }
 
-    public Partie modifier(Partie unePartie) throws DAOException {
+    public static void modifier(Partie unePartie) throws DAOException {
         Connection cnx;
         Partie partie=null;
         try{
             cnx=SQLConnectionFactory.getConnection();
 
+            int diff = unePartie.getNiveauDifficulte().ordinal();
+            Timestamp dateDebut = Timestamp.valueOf(unePartie.getDateDebut());
+            Timestamp dateFin = Timestamp.valueOf(unePartie.getDateFin());
+            int id =unePartie.getId();
             PreparedStatement stmt = cnx.prepareStatement("UPDATE Partie SET  niveauDifficulte=?, dateDebut=?, dateFin=? WHERE id=?");
-            stmt.setInt(1, unePartie.getNiveauDifficulte().ordinal());
-            stmt.setTimestamp(2, Timestamp.valueOf(unePartie.getDateDebut()));
-            stmt.setTimestamp(3, Timestamp.valueOf(unePartie.getDateFin()));
-            stmt.setInt(4, unePartie.getId());
 
+            stmt.setInt(1,diff);
+            stmt.setTimestamp(2, dateDebut);
+            stmt.setTimestamp(3, dateFin);
+            stmt.setInt(4, id);
 
-            ResultSet rs = stmt.executeQuery();
+            stmt.execute();
 
-            if(rs.next()) partie= importerPartie(rs);
 
             cnx.close();
 
-        } catch(SQLException | DAOException ex){
+        } catch(SQLException  ex){
             throw new DAOException(ex);
         }
-        return partie;
     }
 
-    public void supprimer(Partie unePartie) throws DAOException {
+    public static void supprimer(Partie unePartie) throws DAOException {
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
-
+            int id = unePartie.getId();
             PreparedStatement stmt = cnx.prepareStatement("DELETE FROM Partie WHERE id=?");
-            stmt.setInt(1, unePartie.getId());
+            stmt.setInt(1,id);
 
 
             stmt.execute();
@@ -96,7 +100,7 @@ public class PartieDao implements Dao<Partie>{
             throw new DAOException(ex);
         }
     }
-    public ArrayList<Partie> trouverTout()throws DAOException{
+    public static ArrayList<Partie> trouverTout()throws DAOException{
         ArrayList<Partie> parties=null;
         Connection cnx;
         try{
@@ -118,7 +122,7 @@ public class PartieDao implements Dao<Partie>{
 
         return parties;
     }
-    public ArrayList<Partie> trouverPartieParDifficulte(NiveauDifficulte unNiveau) throws DAOException{
+    public static ArrayList<Partie> trouverPartieParDifficulte(NiveauDifficulte unNiveau) throws DAOException{
         ArrayList<Partie> parties=null;
         Connection cnx;
         try{
@@ -141,7 +145,7 @@ public class PartieDao implements Dao<Partie>{
 
         return parties;
     }
-    public  ArrayList<Partie> trouverPartieParDate(LocalDateTime uneDate) throws DAOException{
+    public static   ArrayList<Partie> trouverPartieParDate(LocalDateTime uneDate) throws DAOException{
         ArrayList<Partie> parties=null;
         Connection cnx;
         try{
@@ -165,6 +169,7 @@ public class PartieDao implements Dao<Partie>{
         return parties;
     }
     private static  Partie importerPartie(ResultSet rs) throws DAOException {
+
         try{
             return new Partie(rs.getInt("id"),  rs.getTimestamp("dateDebut").toLocalDateTime(), rs.getTimestamp("dateFin").toLocalDateTime(), NiveauDifficulte.values()[rs.getInt("niveauDifficulte")]);
         }catch (SQLException e){

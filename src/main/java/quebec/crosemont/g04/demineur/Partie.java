@@ -41,6 +41,7 @@ public class Partie {
             return dateDebut;
         }
 
+
         public LocalDateTime getDateFin() {
             return dateFin;
         }
