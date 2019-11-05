@@ -29,8 +29,8 @@ public class PartieDao extends Dao<Partie> {
         return partie;
     }
 
-    public static void ajouter(Partie unePartie) throws DAOException {
-        //Partie partie=null;
+    public static Partie ajouter(Partie unePartie) throws DAOException {
+        Partie partie=null;
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -48,6 +48,8 @@ public class PartieDao extends Dao<Partie> {
             stmt.execute();
 
             cnx.close();
+            partie=lire(unePartie.getId());
+            return partie;
 
 
         } catch(SQLException ex){
@@ -56,7 +58,7 @@ public class PartieDao extends Dao<Partie> {
 
     }
 
-    public static void modifier(Partie unePartie) throws DAOException {
+    public static Partie modifier(Partie unePartie) throws DAOException {
         Connection cnx;
         Partie partie=null;
         try{
@@ -77,6 +79,7 @@ public class PartieDao extends Dao<Partie> {
 
 
             cnx.close();
+            return lire(id);
 
         } catch(SQLException  ex){
             throw new DAOException(ex);
