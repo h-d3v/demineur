@@ -15,18 +15,63 @@ import java.util.regex.Matcher;
 
 public class main{
 	Grille grille;
-	//ArrayList<Joueur> joueurs=JoueurDao.trouverTout();
-	ArrayList<Partie> parties;
-	public static void main (String[] args) {
-		Scanner in = new Scanner(System.in);
 
-		int largeur=0,hauteur=0;
-		Partie partie= new Partie(11, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11,2),NiveauDifficulte.DIFFICILE);
-		try {
-			PartieDao.lire(1);
-		} catch (DAOException e) {
-			e.printStackTrace();
+	ArrayList<Partie> parties;
+
+
+	public static void main (String[] args) throws DAOException {
+		Scanner in = new Scanner(System.in);
+		ArrayList<Joueur> joueurs=JoueurDao.trouverTout();
+		System.out.println("Entrez votre pseudo: ");
+		String pseudoJoueurAChercher=in.next();
+		Joueur unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
+		boolean nouveau=false,matches;
+		while(unJoueur==null){
+			System.out.println("Pseudo non existant, voulez devenir un nouveau joueur? o/n");
+			String reponse=in.next();
+			if(reponse=="o"||reponse=="oui"){
+				nouveau=true;
+				break;
+			}
+			System.out.println("Entrez votre pseudo: ");
+			pseudoJoueurAChercher=in.next();
+			unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
+			matches=false;
+			String pseudo = null,nom = null;
+			if(nouveau){
+
+				while (matches==false){
+					System.out.println("Entrez votre nom: ");
+					nom=in.next();
+					String pattern = "[A-Z][a-z]*";
+					matches=Pattern.matches(pattern,nom);
+				}
+				matches=false;
+				while (matches==false){
+					System.out.println("Entrez le pseudo que vous desirez: ");
+					pseudo=in.next();
+					String pattern = "\\w";
+					matches=Pattern.matches(pattern,pseudo);
+				}
+				unJoueur= new Joueur(nom,pseudo);
+				JoueurDao.ajouter(unJoueur);
+			}
+			joueurs=JoueurDao.trouverTout();
+			int i=1;
+			String meilleursJoueurs="";
+			while (i<11) {
+				for (Joueur joueur : joueurs) {
+					meilleursJoueurs+="\n"+i+ " : " + joueur.toString();
+				}
+				i++;
+			}
+			System.out.println(meilleursJoueurs);
 		}
+		System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
+		//NiveauDifficulte=
+		int largeur=0,hauteur=0;
+
+		Partie partie= new Partie(11, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11,2),NiveauDifficulte.DIFFICILE);
 
 		//tant qu'un numero valide n'est pas entre, le programme n'avance pas, la grille doit etre conforme aux dimensions
 		//Entre 5*5 et integer_maxValue** cases
@@ -92,7 +137,7 @@ public class main{
 		String  chaine="",option="";
 		int x=0,y=0;
 
-		boolean partieEnCours=true, matches=false;
+		boolean partieEnCours=true;
 	    //création du patron de l'action a entrée
 		String pattern = "[md](-)[0-9]*(-)[0-9]*";
 

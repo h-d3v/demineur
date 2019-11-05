@@ -64,8 +64,10 @@ public class Joueur{
 		}
 		parties.add(unePartie);
     }
-    
- 
 
-    
+	public String toString() {
+    	String chaine="";
+    	chaine+=pseudo+" ("+niveau+") "+nom;
+		return chaine;
+	}
 }
