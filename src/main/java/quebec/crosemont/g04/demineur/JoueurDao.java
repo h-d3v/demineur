@@ -178,14 +178,10 @@ public class JoueurDao extends Dao<Joueur>{
                 stmt.setString(1, ids);
                 stmt.setString(2, pseudo);
                 stmt.execute();
-
             }
-
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-
-
         return desParties;
     }
 }
