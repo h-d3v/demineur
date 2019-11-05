@@ -5,11 +5,11 @@ import java.util.*;
 
 public class JoueurDao extends Dao<Joueur>{
 
-  public Joueur lire(String unPseudonyme )throws DAOException{
+  public static Joueur lire(String unPseudonyme )throws DAOException{
     Joueur joueur=null;
     try {
       Connection cnx=SQLConnectionFactory.getConnection();
-      String requete = ("SELECT id FROM joueur WHERE nom = ?");
+      String requete = ("SELECT * FROM joueur WHERE pseudo = ? ORDER BY id DESC");
       PreparedStatement stmt = cnx.prepareStatement(requete);
       stmt.setString(1, unPseudonyme);
       ResultSet resultat= stmt.executeQuery();
@@ -26,7 +26,7 @@ public class JoueurDao extends Dao<Joueur>{
 
   }
 
-  public Joueur ajouter(Joueur unJoueur) throws DAOException{
+  public static Joueur ajouter(Joueur unJoueur) throws DAOException{
     Connection cnx;
     try{
       cnx=SQLConnectionFactory.getConnection();
@@ -46,7 +46,7 @@ public class JoueurDao extends Dao<Joueur>{
 
   }
 
-  public Joueur modifier(Joueur unJoueur)throws DAOException{
+  public static Joueur modifier(Joueur unJoueur)throws DAOException{
     Joueur joueur=null;
     try{
       String url = "jdbc:mysql//localhost/demineur.bd:";
