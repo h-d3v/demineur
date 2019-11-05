@@ -45,7 +45,7 @@ public class JoueurDao extends Dao<Joueur>{
             throw new DAOException(ex);
 
         }
-        return joueur;
+        return lire(joueur.getPseudo());
 
     }
 
@@ -64,7 +64,7 @@ public class JoueurDao extends Dao<Joueur>{
         }catch (SQLException ex){
             throw new DAOException(ex);
         }
-        return unJoueur;
+        return lire(unJoueur.getPseudo());
 
     }
 
@@ -84,7 +84,7 @@ public class JoueurDao extends Dao<Joueur>{
         }catch (SQLException e){
             throw new DAOException(e);
         }
-        return joueur;
+        return lire(joueur.getPseudo());
     }
 
     public static void supprimer(Joueur unJoueur)throws DAOException{
