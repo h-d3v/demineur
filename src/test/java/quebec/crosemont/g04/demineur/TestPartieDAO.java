@@ -23,8 +23,10 @@ public class TestPartieDAO {
     }
     @Test
     public void testLire() throws DAOException{
-        Partie partie= new Partie(8,Timestamp.valueOf("2019-11-23 21:00:11.002").toLocalDateTime(),Timestamp.valueOf("2020-11-23 21:00:11.002").toLocalDateTime(),NiveauDifficulte.DIFFICILE);
+        Partie partie= new Partie(8,Timestamp.valueOf("2019-11-23 21:00:11.002").toLocalDateTime(),Timestamp.valueOf("2020-11-23 21:05:11.002").toLocalDateTime(),NiveauDifficulte.DIFFICILE);
         Partie partieLue= PartieDao.lire(8);
+        System.out.println(partie.getDateDebut());
+        System.out.println(partie.getDateFin());
         assertEquals(partie.getDateDebut(), partieLue.getDateDebut());
         assertEquals(partie.getDateFin(), partieLue.getDateFin());
         assertEquals(partie.getId(), partieLue.getId());
@@ -43,6 +45,9 @@ public class TestPartieDAO {
         assertEquals(partie.getId(), partieLue.getId());
         assertEquals(partie.getNiveauDifficulte(), partieLue.getNiveauDifficulte());
 
+    }
+    @Test
+    public void testToutSelectionner() throws DAOException{
     }
 
 

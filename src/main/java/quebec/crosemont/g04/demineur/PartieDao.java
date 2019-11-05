@@ -104,7 +104,7 @@ public class PartieDao extends Dao<Partie> {
         }
     }
     public static ArrayList<Partie> trouverTout()throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -126,7 +126,7 @@ public class PartieDao extends Dao<Partie> {
         return parties;
     }
     public static ArrayList<Partie> trouverPartieParDifficulte(NiveauDifficulte unNiveau) throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -149,7 +149,7 @@ public class PartieDao extends Dao<Partie> {
         return parties;
     }
     public static   ArrayList<Partie> trouverPartieParDate(LocalDateTime uneDate) throws DAOException{
-        ArrayList<Partie> parties=null;
+        ArrayList<Partie> parties=new ArrayList<Partie>();
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
