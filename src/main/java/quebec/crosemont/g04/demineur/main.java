@@ -20,12 +20,15 @@ public class main{
 
 
 	public static void main (String[] args) throws DAOException {
+		//Le programme demande au joueur son pseudo, si il n'est pas trouvé, il devra entrer son nom et un nouveau pseudo.
 		Scanner in = new Scanner(System.in);
 		ArrayList<Joueur> joueurs=JoueurDao.trouverTout();
 		System.out.println("Entrez votre pseudo: ");
 		String pseudoJoueurAChercher=in.next();
 		Joueur unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
 		boolean nouveau=false,matches;
+		//le pseudo n'es pas trouvé du premier coup;
+
 		while(unJoueur==null){
 			System.out.println("Pseudo non existant, voulez devenir un nouveau joueur? o/n");
 			String reponse=in.next();
@@ -38,6 +41,7 @@ public class main{
 			unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
 			matches=false;
 			String pseudo = null,nom = null;
+			//Si c'est un nouveau joueur
 			if(nouveau){
 
 				while (matches==false){
@@ -65,17 +69,40 @@ public class main{
 				}
 				i++;
 			}
+			int position=meilleursJoueurs.indexOf(unJoueur.toString());
+			if(position==-1){
+				meilleursJoueurs+="\n"+joueurs.indexOf(unJoueur)+ " : " + unJoueur.toString();
+			}
 			System.out.println(meilleursJoueurs);
 		}
+		//Choix du niveau de diffucultée
 		System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
-		//NiveauDifficulte=
+
+		String entreeNiveauDiff=in.next();
+
+		//Validation du niveau de difficultée
+		while (!entreeNiveauDiff.equals("facile\\i")||!entreeNiveauDiff.equals("moyen\\i")||!entreeNiveauDiff.equals("difficile\\i")){
+			System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
+			entreeNiveauDiff=in.next();
+		}
 		int largeur=0,hauteur=0;
+		NiveauDifficulte niveauDiffPartie=null;
+		switch(entreeNiveauDiff){
+			case "facile\\i": niveauDiffPartie=NiveauDifficulte.FACILE; largeur=9;hauteur=9;break;
 
-		Partie partie= new Partie(11, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11,2),NiveauDifficulte.DIFFICILE);
+			case "moyen\\i": niveauDiffPartie=NiveauDifficulte.MOYEN; largeur=16;hauteur=16;break;
 
-		//tant qu'un numero valide n'est pas entre, le programme n'avance pas, la grille doit etre conforme aux dimensions
-		//Entre 5*5 et integer_maxValue** cases
+			case "difficile\\i": niveauDiffPartie=NiveauDifficulte.DIFFICILE; largeur=24;hauteur=24;break;
+		}
 
+		ArrayList<Partie> partiesNiveauDiff=PartieDao.trouverPartieParDifficulte(niveauDiffPartie);
+		
+		//Début de la nouvelle partie
+		Partie partieCourrante= new Partie(niveauDiffPartie);
+
+		/*Partie du tp1 mise en commentaire pour le tp2:
+		tant qu'un numero valide n'est pas entre, le programme n'avance pas, la grille doit etre conforme aux dimensions
+		Entre 5*5 et integer_maxValue** cases
 		do{
 			System.out.println("Veuillez entrez la largeur  de grille choisie: ");
 			while (!in.hasNextInt()) {
@@ -92,8 +119,7 @@ public class main{
 			}
 			hauteur=in.nextInt();
 		} while (hauteur<5 || hauteur>=Integer.MAX_VALUE ||largeur<5 || largeur>=Integer.MAX_VALUE);
-		int nbCases=largeur*hauteur;
-
+		int nbCases=largeur*hauteur;*/
 
 		Grille grilleJeu=new Grille(largeur,hauteur);
 		int nbBombe=(largeur*hauteur)/10+1;
@@ -179,17 +205,11 @@ public class main{
 			}
 
 			else System.out.println("\nEntrez une action valide (m ou d) SVP\n");
-			
-			
-			
+
 			if(grilleJeu.estReussi()){
 				partieEnCours=false;
 			}
-
-
 		}
-		//Affichage des reultats
-
 
 		//Si la partie est perdue
 		if (!grilleJeu.estReussi()){
