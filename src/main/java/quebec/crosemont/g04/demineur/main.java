@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 
 public class main{
 	Grille grille;
-	ArrayList<Joueur> joueurs=JoueurDao.;
+	//ArrayList<Joueur> joueurs=JoueurDao.trouverTout();
 	ArrayList<Partie> parties;
 	public static void main (String[] args) {
 		Scanner in = new Scanner(System.in);

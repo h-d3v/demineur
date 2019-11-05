@@ -27,14 +27,15 @@ public class JoueurDao extends Dao<Joueur>{
   }
 
   public Joueur ajouter(Joueur unJoueur) throws DAOException{
+    Connection cnx;
     try{
-      String url = "jdbc:mysql//localhost/demineur.bd:";
-      Connection cnx=DriverManager.getConnection(url);
-      String requete = ("INSERT INTO joueur(nom,pseudonyme,niveau,partie) VALUES (?,?,?,?)");
+      cnx=SQLConnectionFactory.getConnection();
+      String requete = ("INSERT INTO joueur(nom,pseudonyme,niveau,partieId) VALUES (?,?,?,?)");
       PreparedStatement stmt = cnx.prepareStatement(requete);
       stmt.setString(1,unJoueur.getNom());
       stmt.setString(2,unJoueur.getPseudo());
       stmt.setInt(3,unJoueur.getNiveau());
+      //stmt.setInt(4,);
       ResultSet rs = stmt.executeQuery();
       stmt.close();
 
@@ -59,18 +60,19 @@ public class JoueurDao extends Dao<Joueur>{
       if (rs.next()) joueur = importerJoueur(rs);
       cnx.close();
     }catch (SQLException e){
-      throw new SQLException(e);
+      throw new DAOException(e);
     }
     return joueur;
   }
 
-  public Joueur supprimer(Joueur unJoueur)throws DAOException{
+  public static void supprimer(Joueur unJoueur)throws DAOException{
+    Connection cnx;
     try{
-      String url = "jdbc:mysql//localhost/demineur.bd:"
-      Connection cnx=DriverManager.getConnection(url);
+
+      cnx=SQLConnectionFactory.getConnection();
       String requete = ("DELETE FROM joueur WHERE pseudo=?");
       PreparedStatement stmt = cnx.prepareStatement(requete);
-      stmt.setInt(1,unJoueur.getPseudo());
+      stmt.setString(1,unJoueur.getPseudo());
       stmt.execute();
       cnx.close();
     }catch(SQLException ex){
@@ -79,7 +81,7 @@ public class JoueurDao extends Dao<Joueur>{
 
   }
 
-  public ArrayList<Joueur> trouverTout()throws DAOException{
+  public static ArrayList<Joueur> trouverTout()throws DAOException{
         ArrayList<Joueur> joueurs=null;
         Connection cnx;
         try{
@@ -100,7 +102,7 @@ public class JoueurDao extends Dao<Joueur>{
     }
 
 
-  public ArrayList<Joueur> trouverParNiveau(int unNiveau)throws DAOException {
+  public static ArrayList<Joueur> trouverParNiveau(int unNiveau)throws DAOException {
     ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
     Connection cnx;
     try {
@@ -113,18 +115,14 @@ public class JoueurDao extends Dao<Joueur>{
       }
 
     } catch (SQLException e) {
-      throw new SQLException(e);
+      throw new DAOException(e);
     }
     return joueurs;
   }
-    private Joueur importerJoueur (ResultSet rs) throws DAOException {
-      //ArrayList<Partie> desParties=PartieDao.trouverTout();
-
-      try {
-        for () {
-
-        }
-        PartieDao.lire()
+    private static Joueur importerJoueur (ResultSet rs) throws DAOException {
+      ArrayList<Partie> desParties=PartieDao.trouverTout();
+  try{
+        PartieDao.lire();
         return new Joueur(rs.getString("pseudo"), rs.getString("nom"), rs.getInt("niveau"), desParties);
       } catch (SQLException e) {
         throw new DAOException(e);
