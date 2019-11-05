@@ -1,12 +1,23 @@
 package quebec.crosemont.g04.demineur;
 
-public interface Dao<T> {
+import java.util.concurrent.ThreadPoolExecutor;
 
-    T lire(final Object id) throws DAOException;
+public abstract class Dao<T> {
 
-    T ajouter(final T entite) throws DAOException;
+    static <T> T lire() throws DAOException {
+        return null;
+    }
 
-    void supprimer(final T entite) throws DAOException;
 
-    T modifier(final T entite) throws DAOException;
+    static <T> T ajouter(final T entite) throws DAOException{
+        return null;
+    }
+
+    static <T> void supprimer(final T entite) throws DAOException{
+
+    }
+
+    static <T> T modifier(final T entite) throws DAOException{
+        return null;
+    }
 }

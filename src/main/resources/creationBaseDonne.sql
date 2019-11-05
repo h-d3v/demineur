@@ -24,3 +24,4 @@ CREATE TABLE PartieJoueur(
     CONSTRAINT pseudo_fk FOREIGN KEY (pseudo) REFERENCES Joueur(pseudo),
     CONSTRAINT partieJoueur_und UNIQUE (id, pseudo)
 );
+

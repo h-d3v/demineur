@@ -50,7 +50,7 @@ public class Partie {
 
 
     public void setTemps(int unTemps){
-        int tempsDifference = unTemps- this.getTemps();
+        int tempsDifference = unTemps- getTemps();
         if (tempsDifference>0) {
             dateFin = dateFin.plusSeconds(tempsDifference);
         }
