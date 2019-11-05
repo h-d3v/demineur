@@ -30,7 +30,7 @@ public class PartieDao extends Dao<Partie> {
     }
 
     public static void ajouter(Partie unePartie) throws DAOException {
-        Partie partie=null;
+        //Partie partie=null;
         Connection cnx;
         try{
             cnx=SQLConnectionFactory.getConnection();
@@ -43,9 +43,9 @@ public class PartieDao extends Dao<Partie> {
             stmt.setInt(1,diff);
             stmt.setTimestamp(2, dateDebut);
             stmt.setTimestamp(3, dateFin);
-            stmt.setInt(4, 22);
+            stmt.setInt(4, id);
 
-
+            stmt.execute();
 
             cnx.close();
 

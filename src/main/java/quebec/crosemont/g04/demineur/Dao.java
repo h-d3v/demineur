@@ -8,7 +8,6 @@ public abstract class Dao<T> {
         return null;
     }
 
-
     static <T> T ajouter(final T entite) throws DAOException{
         return null;
     }
