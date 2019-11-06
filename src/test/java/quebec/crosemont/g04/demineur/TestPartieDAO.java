@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 
 public class TestPartieDAO {
-    Partie partie= new Partie(20302,LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11),NiveauDifficulte.FACILE);
+    Partie partie= new Partie(202,LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11),NiveauDifficulte.FACILE);
     @Test
     public void testAjouter() throws DAOException{
         Partie partieLue=PartieDao.ajouter(partie);

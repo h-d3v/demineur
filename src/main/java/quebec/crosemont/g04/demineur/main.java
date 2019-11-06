@@ -3,15 +3,8 @@
  *Fait par Julien Jacquard, Riyad Trii & Hédi Ouahada
  */
 package quebec.crosemont.g04.demineur;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.Random;
 import java.util.*;
-import java.io.*;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class main{
 	Grille grille;
@@ -40,7 +33,7 @@ public class main{
 			pseudoJoueurAChercher=in.next();
 			unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
 			matches=false;
-			String pseudo = null,nom = null;
+			String pseudo = null, nom = null;
 			//Si c'est un nouveau joueur
 			if(nouveau){
 
@@ -77,26 +70,26 @@ public class main{
 		}
 		//Choix du niveau de diffucultée
 		System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
-
 		String entreeNiveauDiff=in.next();
 
 		//Validation du niveau de difficultée
-		while (!entreeNiveauDiff.equals("facile\\i")||!entreeNiveauDiff.equals("moyen\\i")||!entreeNiveauDiff.equals("difficile\\i")){
+		while (!entreeNiveauDiff.matches("(?i)(facile)")&&!entreeNiveauDiff.matches("(?i)(moyen)")&&!entreeNiveauDiff.matches("(?i)(difficile)")){
 			System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
 			entreeNiveauDiff=in.next();
 		}
+
 		int largeur=0,hauteur=0;
 		NiveauDifficulte niveauDiffPartie=null;
-		switch(entreeNiveauDiff){
-			case "facile\\i": niveauDiffPartie=NiveauDifficulte.FACILE; largeur=9;hauteur=9;break;
+		switch(entreeNiveauDiff.toLowerCase()){
+			case "facile": niveauDiffPartie=NiveauDifficulte.FACILE; largeur=9;hauteur=9;break;
 
-			case "moyen\\i": niveauDiffPartie=NiveauDifficulte.MOYEN; largeur=16;hauteur=16;break;
+			case "moyen": niveauDiffPartie=NiveauDifficulte.MOYEN; largeur=16;hauteur=16;break;
 
 			case "difficile\\i": niveauDiffPartie=NiveauDifficulte.DIFFICILE; largeur=24;hauteur=24;break;
 		}
 
 		ArrayList<Partie> partiesNiveauDiff=PartieDao.trouverPartieParDifficulte(niveauDiffPartie);
-		
+
 		//Début de la nouvelle partie
 		Partie partieCourrante= new Partie(niveauDiffPartie);
 
@@ -216,11 +209,19 @@ public class main{
 			grilleJeu.toutReveler();
 			System.out.println(grilleJeu);
 			System.out.println("Partie PERDUE \n redemarrer le jeu pour essayer de nouveau");
+			//On termine la partie et on l'enregistre dans la db
+			partieCourrante.terminer();
+			PartieDao.ajouter(partieCourrante);
+			JoueurDao.ajouterPartieAJoueur(unJoueur, partieCourrante);
 		}
-		//Si le partie est gagnee
+		//Si la partie est gagnee
 		else{
 			System.out.println(grilleJeu);
 			System.out.println("BRAVO \n VOUS ETES VAINQUEUR");
+			//On termine la partie et on l'enregistre dans la db
+			partieCourrante.terminer();
+			PartieDao.ajouter(partieCourrante);
+			JoueurDao.ajouterPartieAJoueur(unJoueur, partieCourrante);
 		}
 
 	}
