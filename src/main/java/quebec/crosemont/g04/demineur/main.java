@@ -22,37 +22,39 @@ public class main{
 		boolean nouveau=false,matches;
 		//le pseudo n'es pas trouvé du premier coup;
 
-		while(unJoueur==null){
+		while(unJoueur==null) {
 			System.out.println("Pseudo non existant, voulez devenir un nouveau joueur? o/n");
-			String reponse=in.next();
-			if(reponse=="o"||reponse=="oui"){
-				nouveau=true;
-				break;
+			String reponse = in.next();
+			if (reponse.equals("o") || reponse.equals("oui")) {
+				nouveau = true;
 			}
-			System.out.println("Entrez votre pseudo: ");
-			pseudoJoueurAChercher=in.next();
-			unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
-			matches=false;
-			String pseudo = null, nom = null;
 			//Si c'est un nouveau joueur
-			if(nouveau){
-
-				while (matches==false){
+			matches = false;
+			if (nouveau==true) {
+				String pseudoNouveauJoueur = null, nom = null;
+				while (matches == false) {
 					System.out.println("Entrez votre nom: ");
-					nom=in.next();
+					nom = in.next();
 					String pattern = "[A-Z][a-z]*";
-					matches=Pattern.matches(pattern,nom);
+					matches = Pattern.matches(pattern, nom);
 				}
-				matches=false;
-				while (matches==false){
+				matches = false;
+				while (matches == false) {
 					System.out.println("Entrez le pseudo que vous desirez: ");
-					pseudo=in.next();
-					String pattern = "\\w";
-					matches=Pattern.matches(pattern,pseudo);
+					pseudoNouveauJoueur = in.next();
+					String pattern = "[a-zA-Z]*[0-9]*";
+					matches = Pattern.matches(pattern, pseudoNouveauJoueur);
 				}
-				unJoueur= new Joueur(nom,pseudo);
+				unJoueur = new Joueur(nom, pseudoNouveauJoueur);
 				JoueurDao.ajouter(unJoueur);
+				unJoueur=JoueurDao.lire(pseudoNouveauJoueur);
 			}
+			else{
+				System.out.println("Entrez votre pseudo: ");
+				pseudoJoueurAChercher = in.next();
+				unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
+			}
+		}
 			joueurs=JoueurDao.trouverTout();
 			int i=1;
 			String meilleursJoueurs="";
@@ -67,7 +69,7 @@ public class main{
 				meilleursJoueurs+="\n"+joueurs.indexOf(unJoueur)+ " : " + unJoueur.toString();
 			}
 			System.out.println(meilleursJoueurs);
-		}
+		//}
 		//Choix du niveau de diffucultée
 		System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
 		String entreeNiveauDiff=in.next();
@@ -120,7 +122,7 @@ public class main{
 		
 		  //creation d'une grille vierge pour le premier affichage
 		Grille grilleVierge= new Grille(largeur,hauteur);
-        for(int i=0; i<grilleVierge.cases.length; i++){
+        for(i=0; i<grilleVierge.cases.length; i++){
             for(int j=0;j<grilleVierge.cases[i].length;j++){
                 grilleVierge.cases[i][j]=new Case();
             }
