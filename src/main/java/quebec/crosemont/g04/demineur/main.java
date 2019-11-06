@@ -7,10 +7,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class main{
-	Grille grille;
-
-	ArrayList<Partie> parties;
-
+	protected Grille grille;
+	protected ArrayList<Partie> toutesLesParties;
+	protected ArrayList<Joueur> toutLesJoueurs;
 
 	public static void main (String[] args) throws DAOException {
 		//Le programme demande au joueur son pseudo, si il n'est pas trouvé, il devra entrer son nom et un nouveau pseudo.
@@ -227,6 +226,20 @@ public class main{
 			JoueurDao.ajouterPartieAJoueur(unJoueur, partieCourrante);
 		}
 
+	}
+	{
+		try {
+			toutesLesParties = PartieDao.trouverTout();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
+	{
+		try {
+			toutLesJoueurs = JoueurDao.trouverTout();
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
