@@ -20,8 +20,7 @@ public class main{
 		String pseudoJoueurAChercher=in.next();
 		Joueur unJoueur=JoueurDao.lire(pseudoJoueurAChercher);
 		boolean nouveau=false,matches;
-		//le pseudo n'es pas trouvé du premier coup;
-
+		//le pseudo n'es pas trouvé du premier coup
 		while(unJoueur==null) {
 			System.out.println("Pseudo non existant, voulez devenir un nouveau joueur? o/n");
 			String reponse = in.next();
@@ -57,26 +56,28 @@ public class main{
 		}
 			joueurs=JoueurDao.trouverTout();
 			int i=1;
-			String meilleursJoueurs="";
-			while (i<11) {
+			String meilleursJoueurs="\nLISTE DES MEILLEURS JOUEURS: \n===========================================";
+			;
+			while (i<11 && i<joueurs.size()) {
 				for (Joueur joueur : joueurs) {
 					meilleursJoueurs+="\n"+i+ " : " + joueur.toString();
+					i++;
 				}
-				i++;
 			}
 			int position=meilleursJoueurs.indexOf(unJoueur.toString());
-			if(position==-1){
+			if(position!=-1){
 				meilleursJoueurs+="\n"+joueurs.indexOf(unJoueur)+ " : " + unJoueur.toString();
 			}
+			meilleursJoueurs+="\n===========================================\n";
 			System.out.println(meilleursJoueurs);
 		//}
 		//Choix du niveau de diffucultée
-		System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
+		System.out.println("Choisisez votre niveau de difficulté: \n=====================\n* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines\n=====================\n");
 		String entreeNiveauDiff=in.next();
 
 		//Validation du niveau de difficultée
 		while (!entreeNiveauDiff.matches("(?i)(facile)")&&!entreeNiveauDiff.matches("(?i)(moyen)")&&!entreeNiveauDiff.matches("(?i)(difficile)")){
-			System.out.println("* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines");
+			System.out.println("CHOIX INVALIDE!: \nChoisisez votre niveau de difficulté: \n=====================\n* Facile : 9x9, 10 mines\n" +" * Moyen : 16x16, 40 mines\n" +" * Difficile : 24x24, 99 mines\n=====================\n");
 			entreeNiveauDiff=in.next();
 		}
 
@@ -87,7 +88,7 @@ public class main{
 
 			case "moyen": niveauDiffPartie=NiveauDifficulte.MOYEN; largeur=16;hauteur=16;break;
 
-			case "difficile\\i": niveauDiffPartie=NiveauDifficulte.DIFFICILE; largeur=24;hauteur=24;break;
+			case "difficile": niveauDiffPartie=NiveauDifficulte.DIFFICILE; largeur=24;hauteur=24;break;
 		}
 
 		ArrayList<Partie> partiesNiveauDiff=PartieDao.trouverPartieParDifficulte(niveauDiffPartie);

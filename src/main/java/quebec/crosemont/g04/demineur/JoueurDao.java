@@ -17,7 +17,6 @@ public class JoueurDao extends Dao<Joueur>{
 
             if(resultat.next()){
                 joueur = importerJoueur(resultat);
-                System.out.println(cnx.toString());
             }
             stmt.close();
             cnx.close();
@@ -96,9 +95,6 @@ public class JoueurDao extends Dao<Joueur>{
                 Joueur nouveauJoueur=new Joueur(rs.getString(1), rs.getString(2), rs.getInt(3),JoueurDao.trouverPartiesParJoueur(j));
                 joueurs.add(nouveauJoueur);
             }
-            for (Joueur unJoueur:joueurs) {
-                System.out.println(unJoueur.toString());
-            }
             stmt.close();
             return joueurs ;
         } catch(SQLException ex){
@@ -172,7 +168,6 @@ public class JoueurDao extends Dao<Joueur>{
             }else{
 
                 String ids =String.valueOf(unePartie.getId());
-                System.out.println(ids);
                 stmt=cnx.prepareStatement("INSERT INTO PartieListe VALUES(?, ?)");
                 stmt.setString(1, ids);
                 stmt.setString(2, pseudo);
@@ -195,7 +190,6 @@ public class JoueurDao extends Dao<Joueur>{
         try{
             Joueur unJoueur =new Joueur(rs.getString("nom"), rs.getString("pseudo"),rs.getInt("niveau"), desParties);
             desParties.addAll(trouverPartiesParJoueur(unJoueur));
-            System.out.println(desParties.toString());
             Joueur leJoueur =new Joueur(unJoueur.getNom(),unJoueur.getPseudo(), unJoueur.getNiveau(), desParties);
             return leJoueur;
         } catch (SQLException e) {

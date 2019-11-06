@@ -34,7 +34,12 @@ public class TestJoueurDAO {
         Partie partie= new Partie(202, LocalDateTime.of(2019,11,23,21,00,11,2),LocalDateTime.of(2019,11,23,22,00,11),NiveauDifficulte.FACILE);
         ArrayList<Partie> partieJoueur=JoueurDao.trouverPartiesParJoueur(cobaye);
 
+    }
 
-
+    @Test
+    public void testTrouverTout() throws DAOException{
+        ArrayList<Joueur> listeJoueurs= new ArrayList<Joueur>();
+        ArrayList<Joueur> listeObtenue=JoueurDao.trouverTout();
+        assertEquals(listeJoueurs,listeObtenue);
     }
 }
