@@ -4,53 +4,52 @@ import java.util.*;
 public class Joueur{
 	// //=======================Proprietes================================
 	protected int niveau;
-	protected String nom,pseudo;
+	protected String pseudo;
 	protected ArrayList<Partie> parties;
 	// //=================Constructeurs====================================
-	//Constructeur complet
-	public  Joueur(String unNom, String unPseudo, int unNiveau, ArrayList<Partie> desParties) throws IllegalArgumentException{
-		if (unNom.equals("")||unNom==null) throw new IllegalArgumentException("Le nom ne peut pas etre null ou vide");
+
+	/**
+	 *Constructeur complet
+	 * @param unPseudo String le pseudo d'un joueur
+	 * @param desParties ArrayList<Partie>, la liste de parties du joueur
+	 * @throws IllegalArgumentException si le pseudo est null ou vide
+	 * @throws IllegalArgumentException si la liste des parties est null
+	 */
+	public  Joueur( String unPseudo,  ArrayList<Partie> desParties) throws IllegalArgumentException{
 
 		if (unPseudo.equals("")||unPseudo==null){
 			throw new IllegalArgumentException("Le pseudo ne peut pas etre null ou vide");
 		}
-		if (unNiveau<0){
-			throw new IllegalArgumentException("Le niveau ne peut pas etre inferieur a zero ");
-		}
+
 		if (desParties==null) throw new IllegalArgumentException("Les parties ne peuvent pas etre null");
 
-		niveau=unNiveau;
-		nom=unNom;
 		pseudo=unPseudo;
 		parties=desParties;
 	}
 
-	//Constructeur avec valeurs par defaut
-	public Joueur(String unNom, String unPseudo) throws IllegalArgumentException{
-		if (unNom.equals("") || unNom==null){
-			throw new IllegalArgumentException("Le nom ne peut pas etre null ou vide");
-		}
+	/**Constructeur avec valeurs par defaut
+	 * @param unPseudo
+	 * @throws IllegalArgumentException si le pseudo est null ou vide
+	 */
+	public Joueur(String unPseudo) throws IllegalArgumentException{
 		if (unPseudo.equals("") || unPseudo==null){
 			throw new IllegalArgumentException("Le pseudo ne peut pas etre null ou vide");
 		}
 
 		niveau=0;
-		nom=unNom;
+
 		pseudo=unPseudo;
 		parties= new ArrayList<Partie>();
 	}
 	// //=================Accesseurs(get/set)====================================
-	public String getNom(){
-		return nom;
-	}
-
+	/**
+	 *Accesseur de de l'attribut pseudo du joueur
+	 * @return String le pseudo du joueur
+	 */
 	public String getPseudo(){
 		return pseudo;
 	}
 
-	public int getNiveau(){
-		return niveau;
-	}
 
 	public ArrayList<Partie> getParties(){
 		return parties;
@@ -65,11 +64,16 @@ public class Joueur{
 		parties.add(unePartie);
 	}
 
-	public String toString() {
-		String chaine="";
-		chaine+=pseudo+" ("+niveau+") "+nom;
-		return chaine;
+	public void setParties(ArrayList<Partie> parties) {
+		if (parties==null) throw new IllegalArgumentException("Les parties ne peuvent pas etre null");
+		this.parties = parties;
 	}
 
+
+	public String toString() {
+		String chaine="";
+		chaine+=pseudo+" ("+niveau+") ";
+		return chaine;
+	}
 
 }

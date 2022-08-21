@@ -35,3 +35,6 @@ application {
     // Define the main class for the application
     mainClassName = 'quebec.crosemont.g04.demineur'
 }
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
